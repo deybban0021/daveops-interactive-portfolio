@@ -61,58 +61,58 @@ function FloatingCard({
         <meshBasicMaterial color="#01060c" transparent opacity={0.26 * progress} />
       </mesh>
       <mesh>
-        <boxGeometry args={[1.62, 1.02, 0.16]} />
+        <boxGeometry args={[1.62, 1.02, 0.1]} />
         <meshStandardMaterial
           color={palette.shell}
           metalness={0.68}
-          roughness={0.22}
+          roughness={0.2}
           emissive={palette.glow}
           emissiveIntensity={0.06 * progress}
           transparent
           opacity={0.42 + progress * 0.58}
         />
       </mesh>
-      <mesh position={[0, 0, 0.088]}>
+      <mesh position={[0, 0, 0.058]}>
         <planeGeometry args={[1.42, 0.82]} />
         <meshBasicMaterial color={palette.panel} transparent opacity={0.92 * progress} />
       </mesh>
-      <mesh position={[0, 0.41, 0.095]}>
+      <mesh position={[0, 0.41, 0.06]}>
         <boxGeometry args={[1.36, 0.045, 0.01]} />
         <meshBasicMaterial color={palette.border} transparent opacity={0.95 * progress} />
       </mesh>
-      <mesh position={[0, -0.42, 0.094]}>
+      <mesh position={[0, -0.42, 0.06]}>
         <boxGeometry args={[1.36, 0.025, 0.01]} />
         <meshBasicMaterial color={palette.border} transparent opacity={0.35 * progress} />
       </mesh>
-      <mesh position={[-0.49, 0.1, 0.1]}>
+      <mesh position={[-0.49, 0.1, 0.065]}>
         <boxGeometry args={[0.24, 0.24, 0.01]} />
         <meshBasicMaterial color={palette.strip} transparent opacity={progress} />
       </mesh>
-      <mesh position={[-0.49, 0.1, 0.11]}>
+      <mesh position={[-0.49, 0.1, 0.075]}>
         <boxGeometry args={[0.12, 0.12, 0.01]} />
         <meshBasicMaterial color={palette.accent} transparent opacity={progress} />
       </mesh>
-      <mesh position={[0.08, 0.17, 0.1]}>
+      <mesh position={[0.08, 0.17, 0.07]}>
         <boxGeometry args={[0.56, 0.05, 0.01]} />
         <meshBasicMaterial color={palette.text} transparent opacity={0.95 * progress} />
       </mesh>
-      <mesh position={[0.14, 0.03, 0.1]}>
+      <mesh position={[0.14, 0.03, 0.07]}>
         <boxGeometry args={[0.7, 0.03, 0.01]} />
         <meshBasicMaterial color={palette.meta} transparent opacity={0.7 * progress} />
       </mesh>
-      <mesh position={[0.0, -0.25, 0.1]}>
+      <mesh position={[0.0, -0.25, 0.07]}>
         <boxGeometry args={[1.08, 0.18, 0.01]} />
         <meshBasicMaterial color={palette.panelMuted} transparent opacity={0.95 * progress} />
       </mesh>
-      <mesh position={[-0.46, -0.25, 0.11]}>
+      <mesh position={[-0.46, -0.25, 0.08]}>
         <boxGeometry args={[0.06, 0.06, 0.01]} />
         <meshBasicMaterial color={palette.glow} transparent opacity={progress} />
       </mesh>
-      <mesh position={[0.47, 0.13, 0.1]}>
+      <mesh position={[0.47, 0.13, 0.07]}>
         <boxGeometry args={[0.14, 0.04, 0.01]} />
         <meshBasicMaterial color={palette.border} transparent opacity={progress} />
       </mesh>
-      <mesh position={[0.51, 0.22, 0.1]}>
+      <mesh position={[0.51, 0.22, 0.07]}>
         <boxGeometry args={[0.09, 0.09, 0.01]} />
         <meshBasicMaterial color={palette.glow} transparent opacity={0.65 * progress} />
       </mesh>
@@ -130,19 +130,19 @@ function FloatingCard({
             <boxGeometry args={[0.62, 0.03, 0.01]} />
             <meshBasicMaterial color={palette.meta} transparent opacity={0.58 * progress} />
           </mesh>
-          <mesh position={[0.14, -0.13, 0.1]}>
+          <mesh position={[0.14, -0.13, 0.07]}>
             <boxGeometry args={[0.46, 0.03, 0.01]} />
             <meshBasicMaterial color={palette.meta} transparent opacity={0.42 * progress} />
           </mesh>
-          <mesh position={[0.56, -0.25, 0.11]}>
+          <mesh position={[0.56, -0.25, 0.08]}>
             <boxGeometry args={[0.08, 0.08, 0.01]} />
             <meshBasicMaterial color={palette.border} transparent opacity={progress} />
           </mesh>
         </>
       )}
       <Text
-        position={[0.0, 0.12, 0.11]}
-        fontSize={0.1}
+        position={[0.0, 0.12, 0.08]}
+        fontSize={0.094}
         maxWidth={0.78}
         lineHeight={1.08}
         color={palette.text}
@@ -153,8 +153,8 @@ function FloatingCard({
         {title}
       </Text>
       <Text
-        position={[0.0, -0.01, 0.11]}
-        fontSize={0.053}
+        position={[0.0, -0.01, 0.08]}
+        fontSize={0.051}
         maxWidth={0.84}
         lineHeight={1.08}
         color={palette.meta}
@@ -165,8 +165,8 @@ function FloatingCard({
         {subtitle}
       </Text>
       <Text
-        position={[0.02, -0.25, 0.11]}
-        fontSize={0.048}
+        position={[0.02, -0.25, 0.08]}
+        fontSize={0.045}
         maxWidth={0.84}
         lineHeight={1}
         color="#d7f5ff"
