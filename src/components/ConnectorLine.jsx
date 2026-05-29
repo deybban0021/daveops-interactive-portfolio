@@ -17,15 +17,26 @@ function ConnectorLine({ from, to, mid, progress = 1 }) {
   const currentMid = useMemo(() => curve.getPoint(Math.max(0.001, progress * 0.5)), [curve, progress])
 
   return (
-    <QuadraticBezierLine
-      start={from}
-      end={endPoint.toArray()}
-      mid={currentMid.toArray()}
-      color="#d6a647"
-      lineWidth={1.15}
-      transparent
-      opacity={0.9 * progress}
-    />
+    <>
+      <QuadraticBezierLine
+        start={from}
+        end={endPoint.toArray()}
+        mid={currentMid.toArray()}
+        color="#f7d98e"
+        lineWidth={2.4}
+        transparent
+        opacity={0.08 * progress}
+      />
+      <QuadraticBezierLine
+        start={from}
+        end={endPoint.toArray()}
+        mid={currentMid.toArray()}
+        color="#d6a647"
+        lineWidth={1.15}
+        transparent
+        opacity={0.92 * progress}
+      />
+    </>
   )
 }
 

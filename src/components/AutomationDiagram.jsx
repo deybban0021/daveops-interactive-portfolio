@@ -1,4 +1,5 @@
 import { Text } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import gsap from 'gsap'
 import FloatingCard from './FloatingCard'
@@ -8,6 +9,8 @@ const workflowNodes = [
   {
     id: 'webhook',
     title: 'Webhook',
+    subtitle: 'Inbound trigger',
+    meta: 'POST /lead-intake',
     position: [-4.7, 0.95, 0.1],
     rotation: [0, 0, -0.03],
     tone: 'dark',
@@ -17,6 +20,8 @@ const workflowNodes = [
   {
     id: 'lead-capture',
     title: 'Lead Capture',
+    subtitle: 'Form + landing page',
+    meta: 'New lead • live',
     position: [-3.35, 0.95, 0.14],
     rotation: [0, 0, -0.02],
     tone: 'gold',
@@ -26,6 +31,8 @@ const workflowNodes = [
   {
     id: 'filter',
     title: 'Filter',
+    subtitle: 'Qualification rule',
+    meta: 'Score > 70',
     position: [-2.05, 0.95, 0.1],
     rotation: [0, 0, 0.02],
     tone: 'dark',
@@ -35,6 +42,8 @@ const workflowNodes = [
   {
     id: 'ghl-crm',
     title: 'GHL CRM',
+    subtitle: 'Contact record sync',
+    meta: 'Pipeline: Sales',
     position: [-0.78, 0.95, 0.14],
     rotation: [0, 0, 0.01],
     tone: 'gold',
@@ -53,6 +62,8 @@ const workflowNodes = [
   {
     id: 'router',
     title: 'Router',
+    subtitle: 'Branch conditions',
+    meta: '3 active paths',
     position: [2.65, 0.55, 0.12],
     rotation: [0, 0, 0.02],
     tone: 'dark',
@@ -62,6 +73,8 @@ const workflowNodes = [
   {
     id: 'ai-chat',
     title: 'AI Chat',
+    subtitle: 'Response drafting',
+    meta: 'Intent matched',
     position: [4.1, 1.62, 0.14],
     rotation: [0, 0, 0.03],
     tone: 'gold',
@@ -71,6 +84,8 @@ const workflowNodes = [
   {
     id: 'sms-email',
     title: 'SMS / Email',
+    subtitle: 'Outbound follow-up',
+    meta: 'Queued in 2 min',
     position: [4.1, 0.25, 0.14],
     rotation: [0, 0, -0.02],
     tone: 'dark',
@@ -80,6 +95,8 @@ const workflowNodes = [
   {
     id: 'calendar-booking',
     title: 'Calendar Booking',
+    subtitle: 'Schedule conversion',
+    meta: 'Next slot ready',
     position: [4.1, -1.1, 0.14],
     rotation: [0, 0, 0.02],
     tone: 'gold',
@@ -89,6 +106,8 @@ const workflowNodes = [
   {
     id: 'follow-up-logic',
     title: 'Follow-up Logic',
+    subtitle: 'Delay + retry',
+    meta: '3-step cadence',
     position: [5.55, 0.25, 0.1],
     rotation: [0, 0, 0.01],
     tone: 'dark',
@@ -98,6 +117,8 @@ const workflowNodes = [
   {
     id: 'tag-update',
     title: 'Tag Update',
+    subtitle: 'Segment contact',
+    meta: 'VIP nurture',
     position: [5.55, -1.1, 0.1],
     rotation: [0, 0, -0.02],
     tone: 'dark',
@@ -107,6 +128,8 @@ const workflowNodes = [
   {
     id: 'pipeline-update',
     title: 'Pipeline Update',
+    subtitle: 'Stage transition',
+    meta: 'Qualified lead',
     position: [5.55, 1.62, 0.1],
     rotation: [0, 0, 0.01],
     tone: 'dark',
@@ -116,6 +139,8 @@ const workflowNodes = [
   {
     id: 'n8n-backend',
     title: 'n8n Backend',
+    subtitle: 'Workflow execution',
+    meta: '8 nodes running',
     position: [1.15, -1.28, 0.14],
     rotation: [0, 0, 0.03],
     tone: 'dark',
@@ -125,6 +150,8 @@ const workflowNodes = [
   {
     id: 'dashboard-reporting',
     title: 'Dashboard Reporting',
+    subtitle: 'Ops visibility',
+    meta: 'CTR 34% ↑',
     position: [3.25, -2.38, 0.16],
     rotation: [0, 0, 0.03],
     tone: 'gold',
@@ -164,16 +191,20 @@ function BoardCard({ progress }) {
       <mesh position={[0, 0, -0.12]}>
         <boxGeometry args={[11.9, 5.8, 0.14]} />
         <meshStandardMaterial
-          color="#0b0b0c"
+          color="#111113"
           metalness={0.45}
-          roughness={0.6}
+          roughness={0.52}
           transparent
           opacity={0.4 + progress * 0.6}
         />
       </mesh>
       <mesh position={[0, 0, -0.02]}>
         <planeGeometry args={[11.45, 5.35]} />
-        <meshBasicMaterial color="#121214" transparent opacity={0.9 * progress} />
+        <meshBasicMaterial color="#17171a" transparent opacity={0.92 * progress} />
+      </mesh>
+      <mesh position={[0, 0, -0.01]}>
+        <planeGeometry args={[11.1, 5.02]} />
+        <meshBasicMaterial color="#1b1b1f" transparent opacity={0.22 * progress} />
       </mesh>
       <mesh position={[-4.48, 2.1, 0]}>
         <boxGeometry args={[1.3, 0.08, 0.01]} />
@@ -186,6 +217,22 @@ function BoardCard({ progress }) {
       <mesh position={[4.65, -2.02, 0]}>
         <boxGeometry args={[1.76, 0.08, 0.01]} />
         <meshBasicMaterial color="#2f2411" transparent opacity={0.7 * progress} />
+      </mesh>
+      <mesh position={[-5.0, 0.96, 0]}>
+        <boxGeometry args={[0.72, 0.02, 0.01]} />
+        <meshBasicMaterial color="#2f2a1b" transparent opacity={0.75 * progress} />
+      </mesh>
+      <mesh position={[-5.0, 0.65, 0]}>
+        <boxGeometry args={[0.52, 0.02, 0.01]} />
+        <meshBasicMaterial color="#242117" transparent opacity={0.55 * progress} />
+      </mesh>
+      <mesh position={[-3.9, 0.3, 0]}>
+        <boxGeometry args={[0.92, 0.02, 0.01]} />
+        <meshBasicMaterial color="#282318" transparent opacity={0.45 * progress} />
+      </mesh>
+      <mesh position={[1.0, -1.9, 0]}>
+        <boxGeometry args={[1.12, 0.02, 0.01]} />
+        <meshBasicMaterial color="#2d2619" transparent opacity={0.4 * progress} />
       </mesh>
     </group>
   )
@@ -269,10 +316,14 @@ function HubCard({ progress, position, rotation }) {
 function AutomationDiagram({ scrollProgress = 0 }) {
   const [animatedProgress, setAnimatedProgress] = useState(0)
   const progressRef = useRef(0)
+  const boardRef = useRef(null)
+  const connectorsRef = useRef(null)
+  const nodesRef = useRef(null)
   const nodeMap = useMemo(
     () => Object.fromEntries(workflowNodes.map((node) => [node.id, node])),
     [],
   )
+  const { pointer } = useThree()
 
   useEffect(() => {
     const state = { value: progressRef.current }
@@ -291,58 +342,84 @@ function AutomationDiagram({ scrollProgress = 0 }) {
 
   const hubProgress = smoothStep(0, 0.12, animatedProgress)
 
+  useFrame(() => {
+    if (boardRef.current) {
+      boardRef.current.position.x += (pointer.x * 0.08 - boardRef.current.position.x) * 0.05
+      boardRef.current.position.y += (pointer.y * 0.05 - boardRef.current.position.y) * 0.05
+    }
+
+    if (connectorsRef.current) {
+      connectorsRef.current.position.x += (pointer.x * 0.16 - connectorsRef.current.position.x) * 0.06
+      connectorsRef.current.position.y += (pointer.y * 0.1 - connectorsRef.current.position.y) * 0.06
+    }
+
+    if (nodesRef.current) {
+      nodesRef.current.position.x += (pointer.x * 0.26 - nodesRef.current.position.x) * 0.07
+      nodesRef.current.position.y += (pointer.y * 0.14 - nodesRef.current.position.y) * 0.07
+    }
+  })
+
   return (
     <group scale={0.8} rotation={[-0.94, 0, -0.18]} position={[0.15, -0.12, 0]}>
-      <BoardCard progress={hubProgress} />
-      {workflowConnections.map((connection, index) => {
-        const nodeProgress = smoothStep(
-          0.12 + (index + 1) * 0.055,
-          0.19 + (index + 1) * 0.055,
-          animatedProgress,
-        )
+      <group ref={boardRef}>
+        <BoardCard progress={hubProgress} />
+      </group>
+      <group ref={connectorsRef} position={[0, 0, 0.02]}>
+        {workflowConnections.map((connection, index) => {
+          const nodeProgress = smoothStep(
+            0.12 + (index + 1) * 0.055,
+            0.19 + (index + 1) * 0.055,
+            animatedProgress,
+          )
 
-        return (
-          <ConnectorLine
-            key={`${connection.from}-${connection.to}`}
-            from={nodeMap[connection.from].position}
-            to={nodeMap[connection.to].position}
-            mid={connection.mid}
-            progress={nodeProgress}
-          />
-        )
-      })}
-
-      {workflowNodes.map((node, index) => {
-        const nodeProgress = smoothStep(
-          0.06 + index * 0.06,
-          0.16 + index * 0.06,
-          animatedProgress,
-        )
-
-        if (node.tone === 'hub') {
           return (
-            <HubCard
-              key={node.id}
+            <ConnectorLine
+              key={`${connection.from}-${connection.to}`}
+              from={nodeMap[connection.from].position}
+              to={nodeMap[connection.to].position}
+              mid={connection.mid}
               progress={nodeProgress}
-              position={node.position}
-              rotation={node.rotation}
             />
           )
-        }
+        })}
+      </group>
 
-        return (
-          <FloatingCard
-            key={node.id}
-            title={node.title}
-            position={node.position}
-            tone={node.tone}
-            rotation={node.rotation}
-            scale={node.scale}
-            progress={nodeProgress}
-            floatPhase={node.floatPhase}
-          />
-        )
-      })}
+      <group ref={nodesRef} position={[0, 0, 0.08]}>
+        {workflowNodes.map((node, index) => {
+          const nodeProgress = smoothStep(
+            0.06 + index * 0.06,
+            0.16 + index * 0.06,
+            animatedProgress,
+          )
+
+          if (node.tone === 'hub') {
+            return (
+              <HubCard
+                key={node.id}
+                progress={nodeProgress}
+                position={node.position}
+                rotation={node.rotation}
+              />
+            )
+          }
+
+          return (
+            <FloatingCard
+              key={node.id}
+              title={node.title}
+              subtitle={node.subtitle}
+              meta={node.meta}
+              position={node.position}
+              tone={node.tone}
+              rotation={node.rotation}
+              scale={node.scale}
+              progress={nodeProgress}
+              floatPhase={node.floatPhase}
+              detailLevel={index < 4 ? 'full' : 'compact'}
+            />
+          )
+        })}
+      </group>
     </group>
   )
 }
