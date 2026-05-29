@@ -1,4 +1,4 @@
-import { QuadraticBezierLine } from '@react-three/drei'
+import { Line } from '@react-three/drei'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 
@@ -13,26 +13,29 @@ function ConnectorLine({ from, to, mid, progress = 1, opacityMultiplier = 1 }) {
     [from, mid, to],
   )
 
-  const endPoint = useMemo(() => curve.getPoint(Math.max(0.001, progress)), [curve, progress])
-  const currentMid = useMemo(() => curve.getPoint(Math.max(0.001, progress * 0.5)), [curve, progress])
+  const visiblePoints = useMemo(() => {
+    const safeProgress = Math.max(0.001, progress)
+    const segments = 36
+    const basePoints = curve.getPoints(segments).map((point) => point.toArray())
+    const activeCount = Math.max(2, Math.ceil(segments * safeProgress) + 1)
+    const partial = basePoints.slice(0, activeCount)
+    partial[partial.length - 1] = curve.getPoint(safeProgress).toArray()
+    return partial
+  }, [curve, progress])
 
   return (
     <>
-      <QuadraticBezierLine
-        start={from}
-        end={endPoint.toArray()}
-        mid={currentMid.toArray()}
+      <Line
+        points={visiblePoints}
         color="#7fe6ff"
-        lineWidth={2.8}
+        lineWidth={2.2}
         transparent
         opacity={0.08 * progress * opacityMultiplier}
       />
-      <QuadraticBezierLine
-        start={from}
-        end={endPoint.toArray()}
-        mid={currentMid.toArray()}
+      <Line
+        points={visiblePoints}
         color="#39bfff"
-        lineWidth={1.16}
+        lineWidth={1.04}
         transparent
         opacity={0.52 * progress * opacityMultiplier}
       />

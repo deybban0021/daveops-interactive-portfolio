@@ -20,7 +20,7 @@ function Scene() {
       <Canvas dpr={[1, 1.5]} shadows>
         <color attach="background" args={['#07111d']} />
         <fog attach="fog" args={['#07111d', 15, 23]} />
-        <PerspectiveCamera makeDefault position={[0.04, 0.02, 9.6]} fov={22.8} />
+        <PerspectiveCamera makeDefault position={[0.02, 0.02, 9.8]} fov={23.1} />
         <ambientLight intensity={1.08} />
         <directionalLight position={[2.4, 3.2, 6.4]} intensity={0.52} color="#8fdcff" castShadow />
         <pointLight position={[-3.2, 1.6, 4]} intensity={0.05} color="#d8f6ff" />

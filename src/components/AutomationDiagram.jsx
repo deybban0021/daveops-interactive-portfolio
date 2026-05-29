@@ -4,13 +4,17 @@ import gsap from 'gsap'
 import FloatingCard from './FloatingCard'
 import ConnectorLine from './ConnectorLine'
 
+const REGULAR_PORT_OFFSET = 0.685
+const HUB_INPUT_OFFSET = 1.06
+const HUB_OUTPUT_OFFSET = 1.02
+
 const heroNodes = [
   {
     id: 'webhook',
     title: 'Lead Flow',
     subtitle: 'Capture + routing',
     meta: 'Forms, funnels, handoff',
-    position: [-1.78, 0.24, 0.04],
+    position: [-1.48, 0.2, 0.04],
     rotation: [0, 0, -0.012],
     tone: 'default',
     scale: 0.66,
@@ -22,7 +26,7 @@ const heroNodes = [
     title: 'GHL Systems',
     subtitle: 'Pipelines + automation',
     meta: 'CRM, calendars, workflows',
-    position: [-0.72, 0.18, 0.05],
+    position: [-0.56, 0.18, 0.05],
     rotation: [0, 0, -0.006],
     tone: 'accent',
     scale: 0.7,
@@ -34,7 +38,7 @@ const heroNodes = [
     title: 'n8n Logic',
     subtitle: 'Webhook orchestration',
     meta: 'Backend actions + sync',
-    position: [0.46, 0.3, 0.04],
+    position: [0.34, 0.26, 0.04],
     rotation: [0, 0, 0.008],
     tone: 'default',
     scale: 0.66,
@@ -46,7 +50,7 @@ const heroNodes = [
     title: 'AI Layer',
     subtitle: 'Assistants + prompts',
     meta: 'Chat, support, decisions',
-    position: [1.54, 0.14, 0.05],
+    position: [1.18, 0.12, 0.05],
     rotation: [0, 0, 0.004],
     tone: 'accent',
     scale: 0.7,
@@ -58,7 +62,7 @@ const heroNodes = [
     title: 'Reporting',
     subtitle: 'Dashboards + insights',
     meta: 'Tracking, stats, visibility',
-    position: [2.76, -0.02, 0.06],
+    position: [1.98, 0.02, 0.06],
     rotation: [0, 0, -0.004],
     tone: 'hub',
     scale: 0.72,
@@ -66,30 +70,46 @@ const heroNodes = [
   },
 ]
 
-const heroConnections = [
-  { from: [-1.78, 0.24, 0.04], to: [-0.72, 0.18, 0.05], mid: [-1.26, 0.34, 0.04] },
-  { from: [-0.72, 0.18, 0.05], to: [0.46, 0.3, 0.04], mid: [-0.08, 0.4, 0.04] },
-  { from: [0.46, 0.3, 0.04], to: [1.54, 0.14, 0.05], mid: [1.02, 0.36, 0.04] },
-  { from: [1.54, 0.14, 0.05], to: [2.76, -0.02, 0.06], mid: [2.16, 0.14, 0.05] },
-]
+function getInputPort(node) {
+  const offset = node.tone === 'hub' ? HUB_INPUT_OFFSET : REGULAR_PORT_OFFSET
+  return [node.position[0] - offset * node.scale, node.position[1], node.position[2]]
+}
+
+function getOutputPort(node) {
+  const offset = node.tone === 'hub' ? HUB_OUTPUT_OFFSET : REGULAR_PORT_OFFSET
+  return [node.position[0] + offset * node.scale, node.position[1], node.position[2]]
+}
+
+const heroConnections = heroNodes.slice(0, -1).map((node, index) => {
+  const nextNode = heroNodes[index + 1]
+  const from = getOutputPort(node)
+  const to = getInputPort(nextNode)
+  const span = to[0] - from[0]
+
+  return {
+    from,
+    to,
+    mid: [from[0] + span * 0.5, Math.max(from[1], to[1]) + 0.12, (from[2] + to[2]) / 2],
+  }
+})
 
 function BackgroundField() {
   return (
-    <group position={[0.8, 0.02, -0.08]} rotation={[0, 0, -0.002]}>
+    <group position={[0.3, 0.02, -0.08]} rotation={[0, 0, -0.002]}>
       <mesh position={[0.1, -0.02, -0.04]}>
         <planeGeometry args={[8.8, 3.0]} />
         <meshBasicMaterial color="#07111d" transparent opacity={0.02} />
       </mesh>
-      <mesh position={[1.6, 0.08, -0.02]}>
-        <planeGeometry args={[5.4, 1.9]} />
+      <mesh position={[1.2, 0.06, -0.02]}>
+        <planeGeometry args={[5.8, 1.92]} />
         <meshBasicMaterial color="#0f1a2a" transparent opacity={0.04} />
       </mesh>
-      <mesh position={[2.4, 0.1, -0.01]}>
-        <planeGeometry args={[2.8, 1.16]} />
+      <mesh position={[2.0, 0.08, -0.01]}>
+        <planeGeometry args={[2.6, 1.08]} />
         <meshBasicMaterial color="#16304b" transparent opacity={0.05} />
       </mesh>
       <group position={[0, 0, 0.001]}>
-        {[-2.6, -1.2, 0.4, 2.0, 3.4].map((x) => (
+        {[-2.2, -1.0, 0.2, 1.4, 2.6].map((x) => (
           <mesh key={`v-${x}`} position={[x, 0, 0]}>
             <planeGeometry args={[0.006, 1.8]} />
             <meshBasicMaterial color="#25415f" transparent opacity={0.04} />
@@ -97,7 +117,7 @@ function BackgroundField() {
         ))}
         {[-0.62, -0.08, 0.46].map((y) => (
           <mesh key={`h-${y}`} position={[0, y, 0]}>
-            <planeGeometry args={[7.2, 0.006]} />
+            <planeGeometry args={[6.4, 0.006]} />
             <meshBasicMaterial color="#25415f" transparent opacity={0.04} />
           </mesh>
         ))}
@@ -110,7 +130,7 @@ function BackgroundField() {
         <boxGeometry args={[0.26, 0.018, 0.004]} />
         <meshBasicMaterial color="#7fe6ff" transparent opacity={0.42} />
       </mesh>
-      <mesh position={[2.9, -0.54, -0.01]}>
+      <mesh position={[2.3, -0.54, -0.01]}>
         <boxGeometry args={[1.12, 0.014, 0.004]} />
         <meshBasicMaterial color="#214666" transparent opacity={0.12} />
       </mesh>
@@ -260,7 +280,7 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.72} rotation={[-0.07, 0, -0.008]} position={[0.92, -0.02, 0]}>
+    <group scale={0.68} rotation={[-0.07, 0, -0.008]} position={[0.42, -0.02, 0]}>
       <BackgroundField />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (
