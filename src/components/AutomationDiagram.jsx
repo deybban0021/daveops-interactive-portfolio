@@ -11,7 +11,7 @@ const workflowNodes = [
     title: 'Webhook',
     subtitle: 'Inbound trigger',
     meta: 'POST /lead-intake',
-    position: [-4.7, 0.95, 0.1],
+    position: [-5.5, 1.1, 0.1],
     rotation: [0, 0, -0.03],
     tone: 'dark',
     scale: 0.72,
@@ -21,11 +21,11 @@ const workflowNodes = [
     id: 'lead-capture',
     title: 'Lead Capture',
     subtitle: 'Form + landing page',
-    meta: 'New lead • live',
-    position: [-3.35, 0.95, 0.14],
+    meta: 'New lead - live',
+    position: [-4.0, 1.1, 0.14],
     rotation: [0, 0, -0.02],
     tone: 'gold',
-    scale: 0.92,
+    scale: 0.98,
     floatPhase: 0.7,
   },
   {
@@ -33,7 +33,7 @@ const workflowNodes = [
     title: 'Filter',
     subtitle: 'Qualification rule',
     meta: 'Score > 70',
-    position: [-2.05, 0.95, 0.1],
+    position: [-2.45, 1.1, 0.1],
     rotation: [0, 0, 0.02],
     tone: 'dark',
     scale: 0.72,
@@ -44,19 +44,19 @@ const workflowNodes = [
     title: 'GHL CRM',
     subtitle: 'Contact record sync',
     meta: 'Pipeline: Sales',
-    position: [-0.78, 0.95, 0.14],
+    position: [-0.65, 0.95, 0.14],
     rotation: [0, 0, 0.01],
     tone: 'gold',
-    scale: 0.94,
+    scale: 1,
     floatPhase: 1.6,
   },
   {
     id: 'daveops-hub',
     title: 'DaveOps Automation Hub',
-    position: [0.92, 0.55, 0.18],
+    position: [1.45, 0.5, 0.18],
     rotation: [0, 0, -0.03],
     tone: 'hub',
-    scale: 1.34,
+    scale: 1.28,
     floatPhase: 2,
   },
   {
@@ -64,7 +64,7 @@ const workflowNodes = [
     title: 'Router',
     subtitle: 'Branch conditions',
     meta: '3 active paths',
-    position: [2.65, 0.55, 0.12],
+    position: [3.65, 0.48, 0.12],
     rotation: [0, 0, 0.02],
     tone: 'dark',
     scale: 0.76,
@@ -75,7 +75,7 @@ const workflowNodes = [
     title: 'AI Chat',
     subtitle: 'Response drafting',
     meta: 'Intent matched',
-    position: [4.1, 1.62, 0.14],
+    position: [5.55, 1.85, 0.14],
     rotation: [0, 0, 0.03],
     tone: 'gold',
     scale: 0.88,
@@ -86,7 +86,7 @@ const workflowNodes = [
     title: 'SMS / Email',
     subtitle: 'Outbound follow-up',
     meta: 'Queued in 2 min',
-    position: [4.1, 0.25, 0.14],
+    position: [5.55, 0.45, 0.14],
     rotation: [0, 0, -0.02],
     tone: 'dark',
     scale: 0.88,
@@ -97,7 +97,7 @@ const workflowNodes = [
     title: 'Calendar Booking',
     subtitle: 'Schedule conversion',
     meta: 'Next slot ready',
-    position: [4.1, -1.1, 0.14],
+    position: [5.55, -1.25, 0.14],
     rotation: [0, 0, 0.02],
     tone: 'gold',
     scale: 0.9,
@@ -108,7 +108,7 @@ const workflowNodes = [
     title: 'Follow-up Logic',
     subtitle: 'Delay + retry',
     meta: '3-step cadence',
-    position: [5.55, 0.25, 0.1],
+    position: [7.45, 0.45, 0.1],
     rotation: [0, 0, 0.01],
     tone: 'dark',
     scale: 0.72,
@@ -119,7 +119,7 @@ const workflowNodes = [
     title: 'Tag Update',
     subtitle: 'Segment contact',
     meta: 'VIP nurture',
-    position: [5.55, -1.1, 0.1],
+    position: [7.45, -1.25, 0.1],
     rotation: [0, 0, -0.02],
     tone: 'dark',
     scale: 0.72,
@@ -130,7 +130,7 @@ const workflowNodes = [
     title: 'Pipeline Update',
     subtitle: 'Stage transition',
     meta: 'Qualified lead',
-    position: [5.55, 1.62, 0.1],
+    position: [7.45, 1.85, 0.1],
     rotation: [0, 0, 0.01],
     tone: 'dark',
     scale: 0.74,
@@ -141,7 +141,7 @@ const workflowNodes = [
     title: 'n8n Backend',
     subtitle: 'Workflow execution',
     meta: '8 nodes running',
-    position: [1.15, -1.28, 0.14],
+    position: [2.3, -1.5, 0.14],
     rotation: [0, 0, 0.03],
     tone: 'dark',
     scale: 0.88,
@@ -151,8 +151,8 @@ const workflowNodes = [
     id: 'dashboard-reporting',
     title: 'Dashboard Reporting',
     subtitle: 'Ops visibility',
-    meta: 'CTR 34% ↑',
-    position: [3.25, -2.38, 0.16],
+    meta: 'CTR 34% up',
+    position: [5.3, -2.95, 0.16],
     rotation: [0, 0, 0.03],
     tone: 'gold',
     scale: 0.98,
@@ -161,19 +161,19 @@ const workflowNodes = [
 ]
 
 const workflowConnections = [
-  { from: 'webhook', to: 'lead-capture', mid: [-4.02, 1.12, 0.1] },
-  { from: 'lead-capture', to: 'filter', mid: [-2.7, 1.12, 0.1] },
-  { from: 'filter', to: 'ghl-crm', mid: [-1.42, 1.12, 0.1] },
-  { from: 'ghl-crm', to: 'daveops-hub', mid: [0.0, 1.05, 0.1] },
-  { from: 'daveops-hub', to: 'router', mid: [1.92, 0.7, 0.1] },
-  { from: 'router', to: 'ai-chat', mid: [3.34, 1.28, 0.1] },
-  { from: 'router', to: 'sms-email', mid: [3.34, 0.44, 0.1] },
-  { from: 'router', to: 'calendar-booking', mid: [3.34, -0.64, 0.1] },
-  { from: 'ai-chat', to: 'pipeline-update', mid: [4.88, 1.86, 0.1] },
-  { from: 'sms-email', to: 'follow-up-logic', mid: [4.84, 0.42, 0.1] },
-  { from: 'calendar-booking', to: 'tag-update', mid: [4.82, -1.36, 0.1] },
-  { from: 'daveops-hub', to: 'n8n-backend', mid: [1.08, -0.34, 0.1] },
-  { from: 'n8n-backend', to: 'dashboard-reporting', mid: [2.2, -2.02, 0.1] },
+  { from: 'webhook', to: 'lead-capture', mid: [-4.72, 1.28, 0.1] },
+  { from: 'lead-capture', to: 'filter', mid: [-3.18, 1.3, 0.1] },
+  { from: 'filter', to: 'ghl-crm', mid: [-1.5, 1.26, 0.1] },
+  { from: 'ghl-crm', to: 'daveops-hub', mid: [0.5, 1.1, 0.1] },
+  { from: 'daveops-hub', to: 'router', mid: [2.62, 0.72, 0.1] },
+  { from: 'router', to: 'ai-chat', mid: [4.6, 1.5, 0.1] },
+  { from: 'router', to: 'sms-email', mid: [4.7, 0.62, 0.1] },
+  { from: 'router', to: 'calendar-booking', mid: [4.64, -0.6, 0.1] },
+  { from: 'ai-chat', to: 'pipeline-update', mid: [6.45, 2.08, 0.1] },
+  { from: 'sms-email', to: 'follow-up-logic', mid: [6.45, 0.64, 0.1] },
+  { from: 'calendar-booking', to: 'tag-update', mid: [6.46, -1.46, 0.1] },
+  { from: 'daveops-hub', to: 'n8n-backend', mid: [2.05, -0.5, 0.1] },
+  { from: 'n8n-backend', to: 'dashboard-reporting', mid: [3.92, -2.44, 0.1] },
 ]
 
 function smoothStep(edge0, edge1, value) {
@@ -183,13 +183,13 @@ function smoothStep(edge0, edge1, value) {
 
 function BoardCard({ progress }) {
   return (
-    <group position={[0.4, 0.1, -0.02]} rotation={[0, 0, -0.03]}>
+    <group position={[0.55, 0.1, -0.02]} rotation={[0, 0, -0.03]}>
       <mesh position={[0.14, -0.12, -0.18]}>
-        <planeGeometry args={[11.8, 5.9]} />
+        <planeGeometry args={[15.2, 7.1]} />
         <meshBasicMaterial color="#000000" transparent opacity={0.14 * progress} />
       </mesh>
       <mesh position={[0, 0, -0.12]}>
-        <boxGeometry args={[11.9, 5.8, 0.14]} />
+        <boxGeometry args={[15.3, 7, 0.14]} />
         <meshStandardMaterial
           color="#111113"
           metalness={0.45}
@@ -199,39 +199,39 @@ function BoardCard({ progress }) {
         />
       </mesh>
       <mesh position={[0, 0, -0.02]}>
-        <planeGeometry args={[11.45, 5.35]} />
+        <planeGeometry args={[14.82, 6.54]} />
         <meshBasicMaterial color="#17171a" transparent opacity={0.92 * progress} />
       </mesh>
       <mesh position={[0, 0, -0.01]}>
-        <planeGeometry args={[11.1, 5.02]} />
+        <planeGeometry args={[14.46, 6.14]} />
         <meshBasicMaterial color="#1b1b1f" transparent opacity={0.22 * progress} />
       </mesh>
-      <mesh position={[-4.48, 2.1, 0]}>
-        <boxGeometry args={[1.3, 0.08, 0.01]} />
+      <mesh position={[-5.9, 2.62, 0]}>
+        <boxGeometry args={[1.56, 0.08, 0.01]} />
         <meshBasicMaterial color="#4d3813" transparent opacity={progress} />
       </mesh>
-      <mesh position={[-3.4, 2.1, 0]}>
-        <boxGeometry args={[0.48, 0.08, 0.01]} />
+      <mesh position={[-4.6, 2.62, 0]}>
+        <boxGeometry args={[0.54, 0.08, 0.01]} />
         <meshBasicMaterial color="#e1bd69" transparent opacity={progress} />
       </mesh>
-      <mesh position={[4.65, -2.02, 0]}>
-        <boxGeometry args={[1.76, 0.08, 0.01]} />
+      <mesh position={[6.2, -2.72, 0]}>
+        <boxGeometry args={[2.12, 0.08, 0.01]} />
         <meshBasicMaterial color="#2f2411" transparent opacity={0.7 * progress} />
       </mesh>
-      <mesh position={[-5.0, 0.96, 0]}>
-        <boxGeometry args={[0.72, 0.02, 0.01]} />
+      <mesh position={[-6.18, 1.08, 0]}>
+        <boxGeometry args={[0.88, 0.02, 0.01]} />
         <meshBasicMaterial color="#2f2a1b" transparent opacity={0.75 * progress} />
       </mesh>
-      <mesh position={[-5.0, 0.65, 0]}>
-        <boxGeometry args={[0.52, 0.02, 0.01]} />
+      <mesh position={[-6.08, 0.74, 0]}>
+        <boxGeometry args={[0.62, 0.02, 0.01]} />
         <meshBasicMaterial color="#242117" transparent opacity={0.55 * progress} />
       </mesh>
-      <mesh position={[-3.9, 0.3, 0]}>
-        <boxGeometry args={[0.92, 0.02, 0.01]} />
+      <mesh position={[-4.85, 0.36, 0]}>
+        <boxGeometry args={[1.24, 0.02, 0.01]} />
         <meshBasicMaterial color="#282318" transparent opacity={0.45 * progress} />
       </mesh>
-      <mesh position={[1.0, -1.9, 0]}>
-        <boxGeometry args={[1.12, 0.02, 0.01]} />
+      <mesh position={[2.05, -2.2, 0]}>
+        <boxGeometry args={[1.36, 0.02, 0.01]} />
         <meshBasicMaterial color="#2d2619" transparent opacity={0.4 * progress} />
       </mesh>
     </group>
@@ -240,11 +240,7 @@ function BoardCard({ progress }) {
 
 function HubCard({ progress, position, rotation }) {
   return (
-    <group
-      position={position}
-      rotation={rotation}
-      scale={0.86 + progress * 0.14}
-    >
+    <group position={position} rotation={rotation} scale={0.86 + progress * 0.14}>
       <mesh position={[0.16, -0.14, -0.12]}>
         <planeGeometry args={[2.98, 1.9]} />
         <meshBasicMaterial color="#000000" transparent opacity={0.18 * progress} />
@@ -360,7 +356,7 @@ function AutomationDiagram({ scrollProgress = 0 }) {
   })
 
   return (
-    <group scale={0.8} rotation={[-0.94, 0, -0.18]} position={[0.15, -0.12, 0]}>
+    <group scale={0.68} rotation={[-0.94, 0, -0.18]} position={[0.4, -0.04, 0]}>
       <group ref={boardRef}>
         <BoardCard progress={hubProgress} />
       </group>
