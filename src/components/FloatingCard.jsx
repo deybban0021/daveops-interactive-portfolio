@@ -64,10 +64,10 @@ function FloatingCard({
         <boxGeometry args={[1.62, 1.02, 0.16]} />
         <meshStandardMaterial
           color={palette.shell}
-          metalness={0.62}
-          roughness={0.28}
+          metalness={0.68}
+          roughness={0.22}
           emissive={palette.glow}
-          emissiveIntensity={0.05 * progress}
+          emissiveIntensity={0.06 * progress}
           transparent
           opacity={0.42 + progress * 0.58}
         />
@@ -79,6 +79,10 @@ function FloatingCard({
       <mesh position={[0, 0.41, 0.095]}>
         <boxGeometry args={[1.36, 0.045, 0.01]} />
         <meshBasicMaterial color={palette.border} transparent opacity={0.95 * progress} />
+      </mesh>
+      <mesh position={[0, -0.42, 0.094]}>
+        <boxGeometry args={[1.36, 0.025, 0.01]} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.35 * progress} />
       </mesh>
       <mesh position={[-0.49, 0.1, 0.1]}>
         <boxGeometry args={[0.24, 0.24, 0.01]} />
@@ -107,6 +111,10 @@ function FloatingCard({
       <mesh position={[0.47, 0.13, 0.1]}>
         <boxGeometry args={[0.14, 0.04, 0.01]} />
         <meshBasicMaterial color={palette.border} transparent opacity={progress} />
+      </mesh>
+      <mesh position={[0.51, 0.22, 0.1]}>
+        <boxGeometry args={[0.09, 0.09, 0.01]} />
+        <meshBasicMaterial color={palette.glow} transparent opacity={0.65 * progress} />
       </mesh>
       <mesh position={[-0.81, 0, 0.05]}>
         <boxGeometry args={[0.05, 0.13, 0.04]} />
