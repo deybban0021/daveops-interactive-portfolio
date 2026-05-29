@@ -1,13 +1,15 @@
-import { Line } from '@react-three/drei'
+import { QuadraticBezierLine } from '@react-three/drei'
 
-function ConnectorLine({ from, to }) {
+function ConnectorLine({ from, to, mid }) {
   return (
-    <Line
-      points={[from, to]}
+    <QuadraticBezierLine
+      start={from}
+      end={to}
+      mid={mid}
       color="#d6a647"
-      lineWidth={1.2}
+      lineWidth={1.4}
       transparent
-      opacity={0.78}
+      opacity={0.82}
     />
   )
 }
