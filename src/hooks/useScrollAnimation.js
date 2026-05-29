@@ -13,13 +13,11 @@ export function useScrollAnimation(ref) {
 
       gsap.fromTo(
         ref.current,
-        { autoAlpha: 0, y: 48 },
+        { y: 28 },
         {
-          autoAlpha: 1,
           y: 0,
-          duration: 1.1,
+          duration: 0.9,
           ease: 'power3.out',
-          scrollTrigger: undefined,
         },
       )
     },

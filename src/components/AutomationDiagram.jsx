@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import FloatingCard from './FloatingCard'
 import ConnectorLine from './ConnectorLine'
 
+const stageThresholds = [0, 0.18, 0.34, 0.5, 0.66, 0.82, 0.92]
 const stageCameraOffsets = [1.2, 0.4, -1.6, -3.2, -4.9, -6.8, -8.5]
 
 const workflowNodes = [
