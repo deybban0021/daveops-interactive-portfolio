@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
 import Scene from './components/Scene'
 import Hero from './sections/Hero'
@@ -18,6 +18,8 @@ const sections = [
 ]
 
 function App() {
+  const [scrollProgress, setScrollProgress] = useState(0)
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.1,
@@ -33,15 +35,31 @@ function App() {
 
     frameId = requestAnimationFrame(raf)
 
+    const updateProgress = () => {
+      const scrollTop = window.scrollY
+      const maxScroll = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1,
+      )
+
+      setScrollProgress(Math.min(scrollTop / maxScroll, 1))
+    }
+
+    updateProgress()
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    window.addEventListener('resize', updateProgress)
+
     return () => {
       cancelAnimationFrame(frameId)
+      window.removeEventListener('scroll', updateProgress)
+      window.removeEventListener('resize', updateProgress)
       lenis.destroy()
     }
   }, [])
 
   return (
     <>
-      <Scene />
+      <Scene scrollProgress={scrollProgress} />
       <div className="page-shell">
         {sections.map((SectionComponent) => (
           <SectionComponent key={SectionComponent.displayName || SectionComponent.name} />
