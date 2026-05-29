@@ -260,7 +260,7 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.78} rotation={[-0.2, 0, -0.008]} position={[3.9, -0.4, 0]}>
+    <group scale={0.86} rotation={[-0.22, 0, -0.01]} position={[2.65, -0.26, 0]}>
       <BoardCard />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (
