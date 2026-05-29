@@ -20,8 +20,7 @@ const sections = [
 ]
 
 function App() {
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [activeStage, setActiveStage] = useState(0)
+  const [, setScrollProgress] = useState(0)
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -46,22 +45,6 @@ function App() {
       )
 
       setScrollProgress(Math.min(scrollTop / maxScroll, 1))
-
-      const sectionsInDom = Array.from(document.querySelectorAll('[data-stage]'))
-      const viewportAnchor = window.innerHeight * 0.42
-
-      let nextStage = 0
-
-      sectionsInDom.forEach((section) => {
-        const rect = section.getBoundingClientRect()
-        const stage = Number(section.getAttribute('data-stage') || 0)
-
-        if (rect.top <= viewportAnchor) {
-          nextStage = stage
-        }
-      })
-
-      setActiveStage(nextStage)
     }
 
     updateProgress()
@@ -78,7 +61,7 @@ function App() {
 
   return (
     <>
-      <Scene scrollProgress={scrollProgress} activeStage={activeStage} />
+      <Scene />
       <div className="page-shell">
         {sections.map((SectionComponent) => (
           <SectionComponent key={SectionComponent.displayName || SectionComponent.name} />
