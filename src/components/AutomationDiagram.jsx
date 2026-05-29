@@ -7,106 +7,98 @@ import ConnectorLine from './ConnectorLine'
 const heroNodes = [
   {
     id: 'webhook',
-    title: 'Webhook',
-    subtitle: 'Inbound trigger',
-    meta: 'POST /lead-intake',
-    position: [-1.9, 0.28, 0.04],
+    title: 'Lead Flow',
+    subtitle: 'Capture + routing',
+    meta: 'Forms, funnels, handoff',
+    position: [-1.78, 0.24, 0.04],
     rotation: [0, 0, -0.012],
     tone: 'default',
-    scale: 0.7,
+    scale: 0.66,
     detailLevel: 'full',
   },
   {
     id: 'lead-capture',
-    title: 'Lead Capture',
-    subtitle: 'Form + landing page',
-    meta: 'New lead live',
-    position: [-0.72, 0.31, 0.05],
+    title: 'GHL Systems',
+    subtitle: 'Pipelines + automation',
+    meta: 'CRM, calendars, workflows',
+    position: [-0.62, 0.28, 0.05],
     rotation: [0, 0, -0.006],
     tone: 'accent',
-    scale: 0.74,
-    detailLevel: 'full',
-  },
-  {
-    id: 'filter',
-    title: 'Filter',
-    subtitle: 'Qualification rule',
-    meta: 'Score above 70',
-    position: [0.3, 0.28, 0.04],
-    rotation: [0, 0, 0.008],
-    tone: 'default',
     scale: 0.7,
     detailLevel: 'full',
   },
   {
+    id: 'filter',
+    title: 'n8n Logic',
+    subtitle: 'Webhook orchestration',
+    meta: 'Backend actions + sync',
+    position: [0.34, 0.24, 0.04],
+    rotation: [0, 0, 0.008],
+    tone: 'default',
+    scale: 0.66,
+    detailLevel: 'full',
+  },
+  {
     id: 'ghl-crm',
-    title: 'GHL CRM',
-    subtitle: 'Contact sync',
-    meta: 'Pipeline updated',
-    position: [1.38, 0.16, 0.05],
+    title: 'AI Layer',
+    subtitle: 'Assistants + prompts',
+    meta: 'Chat, support, decisions',
+    position: [1.32, 0.14, 0.05],
     rotation: [0, 0, 0.004],
     tone: 'accent',
-    scale: 0.75,
+    scale: 0.7,
     detailLevel: 'full',
   },
   {
     id: 'daveops-hub',
-    title: 'DaveOps Automation Hub',
-    subtitle: 'Decision engine',
-    meta: 'Central orchestration',
-    position: [2.5, 0.02, 0.06],
+    title: 'Reporting',
+    subtitle: 'Dashboards + insights',
+    meta: 'Tracking, stats, visibility',
+    position: [2.38, 0.02, 0.06],
     rotation: [0, 0, -0.004],
     tone: 'hub',
-    scale: 0.78,
+    scale: 0.72,
   },
 ]
 
 const heroConnections = [
-  { from: [-1.9, 0.28, 0.04], to: [-0.72, 0.31, 0.05], mid: [-1.32, 0.4, 0.04] },
-  { from: [-0.72, 0.31, 0.05], to: [0.3, 0.28, 0.04], mid: [-0.2, 0.4, 0.04] },
-  { from: [0.3, 0.28, 0.04], to: [1.38, 0.16, 0.05], mid: [0.84, 0.36, 0.04] },
-  { from: [1.38, 0.16, 0.05], to: [2.5, 0.02, 0.06], mid: [1.96, 0.22, 0.05] },
+  { from: [-1.78, 0.24, 0.04], to: [-0.62, 0.28, 0.05], mid: [-1.18, 0.36, 0.04] },
+  { from: [-0.62, 0.28, 0.05], to: [0.34, 0.24, 0.04], mid: [-0.14, 0.36, 0.04] },
+  { from: [0.34, 0.24, 0.04], to: [1.32, 0.14, 0.05], mid: [0.82, 0.32, 0.04] },
+  { from: [1.32, 0.14, 0.05], to: [2.38, 0.02, 0.06], mid: [1.86, 0.2, 0.05] },
 ]
 
 function CanvasPlane() {
   return (
-    <group position={[0.58, -0.02, -0.06]} rotation={[0, 0, -0.002]}>
-      <mesh position={[0.08, -0.02, -0.04]}>
-        <planeGeometry args={[7.2, 2.4]} />
-        <meshBasicMaterial color="#07111d" transparent opacity={0.12} />
+    <group position={[0.44, -0.02, -0.04]} rotation={[0, 0, -0.002]}>
+      <mesh position={[0.04, -0.02, -0.03]}>
+        <planeGeometry args={[6.2, 2.12]} />
+        <meshBasicMaterial color="#07111d" transparent opacity={0.07} />
       </mesh>
-      <RoundedBox position={[0, 0, -0.03]} args={[6.96, 2.26, 0.008]} radius={0.12} smoothness={6}>
+      <RoundedBox position={[0, 0, -0.02]} args={[6.0, 1.96, 0.004]} radius={0.12} smoothness={6}>
         <meshStandardMaterial
           color="#0c1726"
-          metalness={0.16}
-          roughness={0.4}
-          opacity={0.78}
+          metalness={0.1}
+          roughness={0.48}
+          opacity={0.32}
           transparent
         />
       </RoundedBox>
       <mesh position={[0, 0, 0]}>
-        <planeGeometry args={[6.64, 2.0]} />
-        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.34} />
-      </mesh>
-      <mesh position={[-2.78, 0.78, 0.002]}>
-        <boxGeometry args={[0.9, 0.028, 0.006]} />
-        <meshBasicMaterial color="#17314c" transparent opacity={0.52} />
-      </mesh>
-      <mesh position={[-2.2, 0.78, 0.002]}>
-        <boxGeometry args={[0.46, 0.028, 0.006]} />
-        <meshBasicMaterial color="#54d4ff" transparent opacity={0.84} />
+        <planeGeometry args={[5.78, 1.72]} />
+        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.1} />
       </mesh>
       <group position={[0, 0, 0.001]}>
-        {[-2.7, -1.4, -0.1, 1.2, 2.5].map((x) => (
+        {[-2.0, -0.8, 0.4, 1.6].map((x) => (
           <mesh key={`v-${x}`} position={[x, 0, 0]}>
-            <planeGeometry args={[0.012, 1.94]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.14} />
+            <planeGeometry args={[0.008, 1.4]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.08} />
           </mesh>
         ))}
-        {[-0.72, -0.18, 0.34, 0.86].map((y) => (
+        {[-0.44, 0.0, 0.44].map((y) => (
           <mesh key={`h-${y}`} position={[0, y, 0]}>
-            <planeGeometry args={[6.2, 0.012]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.11} />
+            <planeGeometry args={[5.2, 0.008]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.06} />
           </mesh>
         ))}
       </group>
@@ -200,7 +192,7 @@ function HubCard({ node }) {
         anchorX="left"
         anchorY="middle"
       >
-        AI routing, CRM logic, messaging, and reporting across one workflow canvas
+        Dashboards, lead tracking, and connected visibility across your operations
       </Text>
     </group>
   )
@@ -254,7 +246,7 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.64} rotation={[-0.1, 0, -0.008]} position={[1.28, -0.01, 0]}>
+    <group scale={0.58} rotation={[-0.08, 0, -0.006]} position={[1.72, -0.02, 0]}>
       <CanvasPlane />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (

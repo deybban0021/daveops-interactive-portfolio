@@ -8,22 +8,22 @@ function Hero() {
   return (
     <section ref={ref} className="content-section hero-section panel-left" id="hero" data-stage="0">
       <div className="section-panel hero-panel">
-        <p className="eyebrow">01 / Workflow Journey</p>
-        <h1>GoHighLevel Systems, AI Automations, and Custom CRM Dashboards</h1>
+        <p className="eyebrow">DaveOps Portfolio</p>
+        <h1>I build GoHighLevel systems, AI automations, and CRM dashboards.</h1>
         <p className="lede">
-          I build CRM systems that automate lead flow, follow-ups, booking, reporting,
-          and client operations.
+          I help teams automate lead flow, follow-ups, booking, reporting, and client
+          operations with connected GHL, n8n, webhook, AI, and dashboard systems.
         </p>
         <div className="hero-summary">
-          <span>Webhook</span>
-          <span>Lead Capture</span>
-          <span>Filter</span>
-          <span>GHL CRM</span>
-          <span>DaveOps Automation Hub</span>
+          <span>GoHighLevel</span>
+          <span>n8n</span>
+          <span>Webhooks</span>
+          <span>AI Workflows</span>
+          <span>Dashboards</span>
         </div>
         <div className="hero-actions">
           <a href="#ghl-systems" className="button button-primary">
-            View Workflow
+            View Work
           </a>
           <a href="#final-cta" className="button button-secondary">
             Contact Me
