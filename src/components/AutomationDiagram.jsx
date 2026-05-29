@@ -10,10 +10,10 @@ const heroNodes = [
     title: 'Webhook',
     subtitle: 'Inbound trigger',
     meta: 'POST /lead-intake',
-    position: [-3.35, 0.7, 0.06],
-    rotation: [0, 0, -0.02],
+    position: [-2.95, 0.34, 0.04],
+    rotation: [0, 0, -0.012],
     tone: 'default',
-    scale: 0.68,
+    scale: 0.7,
     detailLevel: 'full',
   },
   {
@@ -21,10 +21,10 @@ const heroNodes = [
     title: 'Lead Capture',
     subtitle: 'Form + landing page',
     meta: 'New lead live',
-    position: [-1.72, 0.67, 0.08],
-    rotation: [0, 0, -0.01],
+    position: [-1.28, 0.38, 0.05],
+    rotation: [0, 0, -0.006],
     tone: 'accent',
-    scale: 0.76,
+    scale: 0.74,
     detailLevel: 'full',
   },
   {
@@ -32,10 +32,10 @@ const heroNodes = [
     title: 'Filter',
     subtitle: 'Qualification rule',
     meta: 'Score above 70',
-    position: [0.18, 0.63, 0.06],
-    rotation: [0, 0, 0.01],
+    position: [0.5, 0.34, 0.04],
+    rotation: [0, 0, 0.008],
     tone: 'default',
-    scale: 0.68,
+    scale: 0.7,
     detailLevel: 'full',
   },
   {
@@ -43,10 +43,10 @@ const heroNodes = [
     title: 'GHL CRM',
     subtitle: 'Contact sync',
     meta: 'Pipeline updated',
-    position: [2.1, 0.52, 0.08],
-    rotation: [0, 0, 0.006],
+    position: [2.22, 0.18, 0.05],
+    rotation: [0, 0, 0.004],
     tone: 'accent',
-    scale: 0.76,
+    scale: 0.75,
     detailLevel: 'full',
   },
   {
@@ -54,65 +54,59 @@ const heroNodes = [
     title: 'DaveOps Automation Hub',
     subtitle: 'Decision engine',
     meta: 'Central orchestration',
-    position: [4.4, 0.1, 0.1],
-    rotation: [0, 0, -0.01],
+    position: [4.46, -0.02, 0.06],
+    rotation: [0, 0, -0.004],
     tone: 'hub',
-    scale: 0.82,
+    scale: 0.86,
   },
 ]
 
 const heroConnections = [
-  { from: [-3.35, 0.7, 0.06], to: [-1.72, 0.67, 0.08], mid: [-2.56, 0.8, 0.06] },
-  { from: [-1.72, 0.67, 0.08], to: [0.18, 0.63, 0.06], mid: [-0.76, 0.77, 0.06] },
-  { from: [0.18, 0.63, 0.06], to: [2.1, 0.52, 0.08], mid: [1.12, 0.73, 0.06] },
-  { from: [2.1, 0.52, 0.08], to: [4.4, 0.1, 0.1], mid: [3.28, 0.64, 0.08] },
+  { from: [-2.95, 0.34, 0.04], to: [-1.28, 0.38, 0.05], mid: [-2.1, 0.48, 0.04] },
+  { from: [-1.28, 0.38, 0.05], to: [0.5, 0.34, 0.04], mid: [-0.4, 0.48, 0.04] },
+  { from: [0.5, 0.34, 0.04], to: [2.22, 0.18, 0.05], mid: [1.38, 0.44, 0.04] },
+  { from: [2.22, 0.18, 0.05], to: [4.46, -0.02, 0.06], mid: [3.34, 0.26, 0.05] },
 ]
 
-function BoardCard() {
+function CanvasPlane() {
   return (
-    <group position={[2.15, -0.18, -0.03]} rotation={[0, 0, -0.002]}>
-      <mesh position={[0.08, -0.04, -0.08]}>
-        <planeGeometry args={[10.8, 4.2]} />
-        <meshBasicMaterial color="#020712" transparent opacity={0.14} />
+    <group position={[0.96, -0.02, -0.06]} rotation={[0, 0, -0.002]}>
+      <mesh position={[0.08, -0.02, -0.04]}>
+        <planeGeometry args={[8.7, 2.64]} />
+        <meshBasicMaterial color="#07111d" transparent opacity={0.12} />
       </mesh>
-      <RoundedBox position={[0, 0, -0.05]} args={[10.5, 3.98, 0.02]} radius={0.16} smoothness={6}>
-        <meshStandardMaterial color="#0b1320" metalness={0.22} roughness={0.3} opacity={0.98} transparent />
+      <RoundedBox position={[0, 0, -0.03]} args={[8.46, 2.46, 0.008]} radius={0.12} smoothness={6}>
+        <meshStandardMaterial
+          color="#0c1726"
+          metalness={0.16}
+          roughness={0.4}
+          opacity={0.78}
+          transparent
+        />
       </RoundedBox>
-      <mesh position={[0, 0, -0.002]}>
-        <planeGeometry args={[10.02, 3.58]} />
-        <meshBasicMaterial color="#0f1928" transparent opacity={0.96} />
-      </mesh>
       <mesh position={[0, 0, 0]}>
-        <planeGeometry args={[9.62, 3.28]} />
-        <meshBasicMaterial color="#142336" transparent opacity={0.2} />
+        <planeGeometry args={[8.1, 2.18]} />
+        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.34} />
       </mesh>
-      <mesh position={[-3.72, 1.13, 0]}>
-        <boxGeometry args={[1.22, 0.04, 0.01]} />
-        <meshBasicMaterial color="#1a3552" transparent opacity={0.84} />
+      <mesh position={[-3.36, 0.9, 0.002]}>
+        <boxGeometry args={[0.9, 0.028, 0.006]} />
+        <meshBasicMaterial color="#17314c" transparent opacity={0.52} />
       </mesh>
-      <mesh position={[-2.72, 1.13, 0]}>
-        <boxGeometry args={[0.48, 0.04, 0.01]} />
-        <meshBasicMaterial color="#4ccfff" />
-      </mesh>
-      <mesh position={[-3.58, 0.76, 0]}>
-        <boxGeometry args={[0.72, 0.016, 0.01]} />
-        <meshBasicMaterial color="#16314b" transparent opacity={0.65} />
-      </mesh>
-      <mesh position={[-3.5, 0.56, 0]}>
-        <boxGeometry args={[0.52, 0.016, 0.01]} />
-        <meshBasicMaterial color="#13283f" transparent opacity={0.46} />
+      <mesh position={[-2.74, 0.9, 0.002]}>
+        <boxGeometry args={[0.46, 0.028, 0.006]} />
+        <meshBasicMaterial color="#54d4ff" transparent opacity={0.84} />
       </mesh>
       <group position={[0, 0, 0.001]}>
-        {[-3.8, -2.2, -0.6, 1.0, 2.6].map((x) => (
+        {[-3.35, -1.75, -0.15, 1.45, 3.05].map((x) => (
           <mesh key={`v-${x}`} position={[x, 0, 0]}>
-            <planeGeometry args={[0.018, 3.14]} />
-            <meshBasicMaterial color="#1f3450" transparent opacity={0.18} />
+            <planeGeometry args={[0.012, 1.94]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.14} />
           </mesh>
         ))}
-        {[-1.12, -0.38, 0.36, 1.1].map((y) => (
+        {[-0.72, -0.18, 0.34, 0.86].map((y) => (
           <mesh key={`h-${y}`} position={[0, y, 0]}>
-            <planeGeometry args={[9.34, 0.016]} />
-            <meshBasicMaterial color="#1f3450" transparent opacity={0.14} />
+            <planeGeometry args={[7.6, 0.012]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.11} />
           </mesh>
         ))}
       </group>
@@ -127,15 +121,15 @@ function HubCard({ node }) {
         <planeGeometry args={[2.38, 1.46]} />
         <meshBasicMaterial color="#020712" transparent opacity={0.14} />
       </mesh>
-      <RoundedBox args={[2.42, 1.48, 0.012]} radius={0.14} smoothness={8}>
+      <RoundedBox args={[2.42, 1.48, 0.008]} radius={0.14} smoothness={8}>
         <meshStandardMaterial
           color="#0c1625"
-          metalness={0.24}
-          roughness={0.18}
+          metalness={0.18}
+          roughness={0.22}
           emissive="#3ec5ff"
-          emissiveIntensity={0.018}
+          emissiveIntensity={0.014}
           transparent
-          opacity={0.98}
+          opacity={0.92}
         />
       </RoundedBox>
       <mesh position={[0, 0, 0.012]}>
@@ -260,8 +254,8 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.86} rotation={[-0.22, 0, -0.01]} position={[2.65, -0.26, 0]}>
-      <BoardCard />
+    <group scale={0.92} rotation={[-0.12, 0, -0.01]} position={[1.72, -0.02, 0]}>
+      <CanvasPlane />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (
           <ConnectorLine

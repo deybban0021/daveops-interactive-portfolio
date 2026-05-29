@@ -86,7 +86,7 @@ a {
 
 .hero-section {
   padding-top: 5rem;
-  padding-left: clamp(0.2rem, 0.8vw, 0.6rem);
+  padding-left: 0;
 }
 
 .section-panel {
@@ -116,7 +116,7 @@ a {
 }
 
 .hero-panel {
-  width: min(100%, 36.5rem);
+  width: min(100%, 32.5rem);
   padding: 1rem 1.15rem 1.1rem;
   background:
     linear-gradient(180deg, rgba(15, 25, 41, 0.9), rgba(10, 18, 30, 0.7)),

@@ -58,19 +58,19 @@ function FloatingCard({
       rotation={rotation}
       scale={scale * (0.76 + progress * 0.24)}
     >
-      <mesh position={[0.14, -0.12, -0.08]}>
+      <mesh position={[0.12, -0.08, -0.05]}>
         <planeGeometry args={[1.34, 0.78]} />
-        <meshBasicMaterial color="#01060c" transparent opacity={0.12 * progress} />
+        <meshBasicMaterial color="#01060c" transparent opacity={0.1 * progress} />
       </mesh>
-      <RoundedBox args={[1.36, 0.82, 0.01]} radius={0.12} smoothness={8}>
+      <RoundedBox args={[1.36, 0.82, 0.006]} radius={0.12} smoothness={8}>
         <meshStandardMaterial
           color={palette.shell}
-          metalness={0.24}
-          roughness={0.2}
+          metalness={0.16}
+          roughness={0.24}
           emissive={palette.glow}
-          emissiveIntensity={0.018 * progress}
+          emissiveIntensity={0.014 * progress}
           transparent
-          opacity={0.52 + progress * 0.48}
+          opacity={0.58 + progress * 0.42}
         />
       </RoundedBox>
       <mesh position={[0, 0, 0.012]}>
