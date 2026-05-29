@@ -1,23 +1,32 @@
-import { Canvas } from '@react-three/fiber'
-import { Float, OrbitControls, PerspectiveCamera, Stars } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { PerspectiveCamera } from '@react-three/drei'
 import AutomationDiagram from './AutomationDiagram'
+
+function CameraParallax() {
+  const { camera, pointer } = useThree()
+
+  useFrame(() => {
+    camera.position.x += ((pointer.x || 0) * 0.22 - camera.position.x) * 0.04
+    camera.position.y += (0.35 + (pointer.y || 0) * 0.12 - camera.position.y) * 0.04
+    camera.lookAt(0, 0, 0)
+  })
+
+  return null
+}
 
 function Scene() {
   return (
     <div className="scene-shell" aria-hidden="true">
       <Canvas dpr={[1, 1.5]} shadows>
         <color attach="background" args={['#050505']} />
-        <fog attach="fog" args={['#050505', 10, 22]} />
+        <fog attach="fog" args={['#050505', 12, 20]} />
         <PerspectiveCamera makeDefault position={[0, 0.35, 9.2]} fov={36} />
-        <ambientLight intensity={0.9} />
-        <directionalLight position={[6, 8, 5]} intensity={1.35} color="#ffd36b" castShadow />
-        <pointLight position={[-5, -3, 3]} intensity={0.8} color="#9a6f1d" />
-        <pointLight position={[0, 4, 1]} intensity={0.35} color="#fff4d6" />
-        <Stars radius={90} depth={34} count={1000} factor={3.5} fade speed={0.3} />
-        <Float speed={1} rotationIntensity={0.08} floatIntensity={0.18}>
-          <AutomationDiagram />
-        </Float>
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.18} />
+        <ambientLight intensity={0.92} />
+        <directionalLight position={[5, 7, 6]} intensity={1.22} color="#ffd36b" castShadow />
+        <pointLight position={[-4, 2, 4]} intensity={0.36} color="#fff1cb" />
+        <pointLight position={[3, -2, 3]} intensity={0.28} color="#8f6a26" />
+        <CameraParallax />
+        <AutomationDiagram />
       </Canvas>
     </div>
   )
