@@ -22,17 +22,17 @@ function ConnectorLine({ from, to, mid, progress = 1 }) {
         start={from}
         end={endPoint.toArray()}
         mid={currentMid.toArray()}
-        color="#f7d98e"
-        lineWidth={2.4}
+        color="#7fe6ff"
+        lineWidth={2.8}
         transparent
-        opacity={0.08 * progress}
+        opacity={0.12 * progress}
       />
       <QuadraticBezierLine
         start={from}
         end={endPoint.toArray()}
         mid={currentMid.toArray()}
-        color="#d6a647"
-        lineWidth={1.15}
+        color="#39bfff"
+        lineWidth={1.16}
         transparent
         opacity={0.92 * progress}
       />
