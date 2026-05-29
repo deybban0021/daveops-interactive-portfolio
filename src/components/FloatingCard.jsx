@@ -13,6 +13,7 @@ function FloatingCard({
   progress = 1,
   floatPhase = 0,
   detailLevel = 'full',
+  emphasis = 1,
 }) {
   const groupRef = useRef(null)
   const palette =
@@ -60,7 +61,7 @@ function FloatingCard({
     >
       <mesh position={[0.12, -0.08, -0.05]}>
         <planeGeometry args={[1.34, 0.78]} />
-        <meshBasicMaterial color="#01060c" transparent opacity={0.1 * progress} />
+        <meshBasicMaterial color="#01060c" transparent opacity={0.08 * progress * emphasis} />
       </mesh>
       <RoundedBox args={[1.36, 0.82, 0.006]} radius={0.12} smoothness={8}>
         <meshStandardMaterial
@@ -68,88 +69,88 @@ function FloatingCard({
           metalness={0.16}
           roughness={0.24}
           emissive={palette.glow}
-          emissiveIntensity={0.014 * progress}
+          emissiveIntensity={0.01 * progress * emphasis}
           transparent
-          opacity={0.58 + progress * 0.42}
+          opacity={(0.34 + progress * 0.28) * emphasis}
         />
       </RoundedBox>
       <mesh position={[0, 0, 0.012]}>
         <planeGeometry args={[1.28, 0.74]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.06 * progress} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.04 * progress * emphasis} />
       </mesh>
       <mesh position={[0, 0, 0.016]}>
         <planeGeometry args={[1.2, 0.68]} />
-        <meshBasicMaterial color={palette.panel} transparent opacity={0.95 * progress} />
+        <meshBasicMaterial color={palette.panel} transparent opacity={0.66 * progress * emphasis} />
       </mesh>
       <mesh position={[0, 0.21, 0.018]}>
         <planeGeometry args={[1.12, 0.16]} />
-        <meshBasicMaterial color={palette.panelSoft} transparent opacity={0.74 * progress} />
+        <meshBasicMaterial color={palette.panelSoft} transparent opacity={0.46 * progress * emphasis} />
       </mesh>
       <mesh position={[0, 0.32, 0.02]}>
         <boxGeometry args={[1.16, 0.022, 0.006]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.92 * progress} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.7 * progress * emphasis} />
       </mesh>
       <mesh position={[0, -0.35, 0.02]}>
         <boxGeometry args={[1.14, 0.012, 0.006]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.22 * progress} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.14 * progress * emphasis} />
       </mesh>
       <mesh position={[-0.41, 0.06, 0.022]}>
         <boxGeometry args={[0.18, 0.18, 0.006]} />
-        <meshBasicMaterial color={palette.strip} transparent opacity={progress} />
+        <meshBasicMaterial color={palette.strip} transparent opacity={progress * emphasis} />
       </mesh>
       <mesh position={[-0.41, 0.06, 0.028]}>
         <boxGeometry args={[0.08, 0.08, 0.006]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={progress} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={progress * emphasis} />
       </mesh>
       <mesh position={[0.1, 0.12, 0.024]}>
         <boxGeometry args={[0.52, 0.034, 0.006]} />
-        <meshBasicMaterial color={palette.text} transparent opacity={0.95 * progress} />
+        <meshBasicMaterial color={palette.text} transparent opacity={0.84 * progress * emphasis} />
       </mesh>
       <mesh position={[0.13, 0.03, 0.024]}>
         <boxGeometry args={[0.6, 0.02, 0.006]} />
-        <meshBasicMaterial color={palette.meta} transparent opacity={0.7 * progress} />
+        <meshBasicMaterial color={palette.meta} transparent opacity={0.56 * progress * emphasis} />
       </mesh>
       <mesh position={[0.06, -0.08, 0.024]}>
         <boxGeometry args={[0.74, 0.012, 0.006]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.28 * progress} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.18 * progress * emphasis} />
       </mesh>
       <mesh position={[0.0, -0.17, 0.024]}>
         <boxGeometry args={[0.94, 0.14, 0.006]} />
-        <meshBasicMaterial color={palette.panelMuted} transparent opacity={0.95 * progress} />
+        <meshBasicMaterial color={palette.panelMuted} transparent opacity={0.62 * progress * emphasis} />
       </mesh>
       <mesh position={[-0.39, -0.17, 0.03]}>
         <boxGeometry args={[0.05, 0.05, 0.006]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={progress} />
+        <meshBasicMaterial color={palette.glow} transparent opacity={progress * emphasis} />
       </mesh>
       <mesh position={[0.39, 0.09, 0.024]}>
         <boxGeometry args={[0.1, 0.026, 0.006]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={progress} />
+        <meshBasicMaterial color={palette.border} transparent opacity={progress * emphasis} />
       </mesh>
       <mesh position={[0.43, 0.15, 0.028]}>
         <boxGeometry args={[0.07, 0.07, 0.006]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.65 * progress} />
+        <meshBasicMaterial color={palette.glow} transparent opacity={0.44 * progress * emphasis} />
       </mesh>
       <mesh position={[-0.685, 0, 0.012]}>
         <boxGeometry args={[0.025, 0.08, 0.012]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.6 * progress} />
+        <meshBasicMaterial color={palette.glow} transparent opacity={0.38 * progress * emphasis} />
       </mesh>
       <mesh position={[0.685, 0, 0.012]}>
         <boxGeometry args={[0.025, 0.08, 0.012]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.6 * progress} />
+        <meshBasicMaterial color={palette.glow} transparent opacity={0.38 * progress * emphasis} />
       </mesh>
       {detailLevel === 'full' && (
         <>
           <mesh position={[0.11, -0.01, 0.024]}>
             <boxGeometry args={[0.48, 0.018, 0.006]} />
-            <meshBasicMaterial color={palette.meta} transparent opacity={0.58 * progress} />
+            <meshBasicMaterial color={palette.meta} transparent opacity={0.38 * progress * emphasis} />
           </mesh>
           <mesh position={[0.11, -0.05, 0.024]}>
             <boxGeometry args={[0.36, 0.018, 0.006]} />
-            <meshBasicMaterial color={palette.meta} transparent opacity={0.42 * progress} />
+            <meshBasicMaterial color={palette.meta} transparent opacity={0.28 * progress * emphasis} />
           </mesh>
           <mesh position={[0.46, -0.17, 0.03]}>
             <boxGeometry args={[0.06, 0.06, 0.006]} />
-            <meshBasicMaterial color={palette.border} transparent opacity={progress} />
+            <meshBasicMaterial color={palette.border} transparent opacity={progress * emphasis} />
           </mesh>
         </>
       )}
@@ -161,7 +162,7 @@ function FloatingCard({
         color={palette.text}
         anchorX="left"
         anchorY="middle"
-        fillOpacity={progress}
+        fillOpacity={progress * emphasis}
       >
         {title}
       </Text>
@@ -173,7 +174,7 @@ function FloatingCard({
         color={palette.meta}
         anchorX="left"
         anchorY="middle"
-        fillOpacity={0.95 * progress}
+        fillOpacity={0.74 * progress * emphasis}
       >
         {subtitle}
       </Text>
@@ -185,7 +186,7 @@ function FloatingCard({
         color="#d7f5ff"
         anchorX="center"
         anchorY="middle"
-        fillOpacity={progress}
+        fillOpacity={0.84 * progress * emphasis}
       >
         {meta}
       </Text>

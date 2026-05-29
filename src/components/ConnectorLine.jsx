@@ -2,7 +2,7 @@ import { QuadraticBezierLine } from '@react-three/drei'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 
-function ConnectorLine({ from, to, mid, progress = 1 }) {
+function ConnectorLine({ from, to, mid, progress = 1, opacityMultiplier = 1 }) {
   const curve = useMemo(
     () =>
       new THREE.QuadraticBezierCurve3(
@@ -25,7 +25,7 @@ function ConnectorLine({ from, to, mid, progress = 1 }) {
         color="#7fe6ff"
         lineWidth={2.8}
         transparent
-        opacity={0.12 * progress}
+        opacity={0.08 * progress * opacityMultiplier}
       />
       <QuadraticBezierLine
         start={from}
@@ -34,7 +34,7 @@ function ConnectorLine({ from, to, mid, progress = 1 }) {
         color="#39bfff"
         lineWidth={1.16}
         transparent
-        opacity={0.92 * progress}
+        opacity={0.52 * progress * opacityMultiplier}
       />
     </>
   )
