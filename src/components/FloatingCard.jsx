@@ -1,4 +1,4 @@
-import { Text } from '@react-three/drei'
+import { RoundedBox, Text } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 
@@ -60,21 +60,28 @@ function FloatingCard({
         <planeGeometry args={[1.56, 0.96]} />
         <meshBasicMaterial color="#01060c" transparent opacity={0.26 * progress} />
       </mesh>
-      <mesh>
-        <boxGeometry args={[1.62, 1.02, 0.1]} />
+      <RoundedBox args={[1.62, 1.02, 0.08]} radius={0.11} smoothness={4}>
         <meshStandardMaterial
           color={palette.shell}
-          metalness={0.68}
-          roughness={0.2}
+          metalness={0.56}
+          roughness={0.16}
           emissive={palette.glow}
-          emissiveIntensity={0.06 * progress}
+          emissiveIntensity={0.045 * progress}
           transparent
           opacity={0.42 + progress * 0.58}
         />
+      </RoundedBox>
+      <mesh position={[0, 0, 0.041]}>
+        <planeGeometry args={[1.5, 0.9]} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.08 * progress} />
       </mesh>
       <mesh position={[0, 0, 0.058]}>
         <planeGeometry args={[1.42, 0.82]} />
         <meshBasicMaterial color={palette.panel} transparent opacity={0.92 * progress} />
+      </mesh>
+      <mesh position={[0, 0.27, 0.06]}>
+        <planeGeometry args={[1.32, 0.22]} />
+        <meshBasicMaterial color="#18293d" transparent opacity={0.55 * progress} />
       </mesh>
       <mesh position={[0, 0.41, 0.06]}>
         <boxGeometry args={[1.36, 0.045, 0.01]} />
@@ -99,6 +106,10 @@ function FloatingCard({
       <mesh position={[0.14, 0.03, 0.07]}>
         <boxGeometry args={[0.7, 0.03, 0.01]} />
         <meshBasicMaterial color={palette.meta} transparent opacity={0.7 * progress} />
+      </mesh>
+      <mesh position={[0.08, -0.16, 0.07]}>
+        <boxGeometry args={[0.82, 0.02, 0.01]} />
+        <meshBasicMaterial color={palette.border} transparent opacity={0.28 * progress} />
       </mesh>
       <mesh position={[0.0, -0.25, 0.07]}>
         <boxGeometry args={[1.08, 0.18, 0.01]} />
@@ -126,7 +137,7 @@ function FloatingCard({
       </mesh>
       {detailLevel === 'full' && (
         <>
-          <mesh position={[0.14, -0.06, 0.1]}>
+          <mesh position={[0.14, -0.06, 0.07]}>
             <boxGeometry args={[0.62, 0.03, 0.01]} />
             <meshBasicMaterial color={palette.meta} transparent opacity={0.58 * progress} />
           </mesh>
