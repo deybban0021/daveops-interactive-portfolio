@@ -3,7 +3,8 @@ import Lenis from 'lenis'
 import Scene from './components/Scene'
 import Hero from './sections/Hero'
 import GHLSystems from './sections/GHLSystems'
-import AIAutomation from './sections/AIAutomation'
+import AutomationBackend from './sections/AutomationBackend'
+import AIIntegrations from './sections/AIIntegrations'
 import DashboardBuild from './sections/DashboardBuild'
 import CaseStudies from './sections/CaseStudies'
 import FinalCTA from './sections/FinalCTA'
@@ -11,7 +12,8 @@ import FinalCTA from './sections/FinalCTA'
 const sections = [
   Hero,
   GHLSystems,
-  AIAutomation,
+  AutomationBackend,
+  AIIntegrations,
   DashboardBuild,
   CaseStudies,
   FinalCTA,
@@ -19,6 +21,7 @@ const sections = [
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [activeStage, setActiveStage] = useState(0)
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -43,6 +46,22 @@ function App() {
       )
 
       setScrollProgress(Math.min(scrollTop / maxScroll, 1))
+
+      const sectionsInDom = Array.from(document.querySelectorAll('[data-stage]'))
+      const viewportAnchor = window.innerHeight * 0.42
+
+      let nextStage = 0
+
+      sectionsInDom.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        const stage = Number(section.getAttribute('data-stage') || 0)
+
+        if (rect.top <= viewportAnchor) {
+          nextStage = stage
+        }
+      })
+
+      setActiveStage(nextStage)
     }
 
     updateProgress()
@@ -59,7 +78,7 @@ function App() {
 
   return (
     <>
-      <Scene scrollProgress={scrollProgress} />
+      <Scene scrollProgress={scrollProgress} activeStage={activeStage} />
       <div className="page-shell">
         {sections.map((SectionComponent) => (
           <SectionComponent key={SectionComponent.displayName || SectionComponent.name} />

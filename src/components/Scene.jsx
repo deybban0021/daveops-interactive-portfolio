@@ -14,7 +14,7 @@ function CameraParallax() {
   return null
 }
 
-function Scene({ scrollProgress }) {
+function Scene({ scrollProgress, activeStage }) {
   return (
     <div className="scene-shell" aria-hidden="true">
       <Canvas dpr={[1, 1.5]} shadows>
@@ -27,7 +27,7 @@ function Scene({ scrollProgress }) {
         <pointLight position={[3, -2, 3]} intensity={0.32} color="#2ea6ff" />
         <pointLight position={[0, 1.5, 6]} intensity={0.24} color="#bcecff" />
         <CameraParallax />
-        <AutomationDiagram scrollProgress={scrollProgress} />
+        <AutomationDiagram scrollProgress={scrollProgress} activeStage={activeStage} />
       </Canvas>
     </div>
   )

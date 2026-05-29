@@ -6,17 +6,22 @@ function FinalCTA() {
   useScrollAnimation(ref)
 
   return (
-    <section ref={ref} className="content-section final-cta" id="final-cta">
-      <div className="section-copy">
-        <p className="eyebrow">05 • Final CTA</p>
-        <h2>Ready to turn the foundation into a full interactive portfolio experience.</h2>
+    <section ref={ref} className="content-section final-cta panel-right" id="final-cta" data-stage="6">
+      <div className="section-panel">
+        <p className="eyebrow">07 / Final CTA</p>
+        <h2>Ready to build a CRM system that actually works?</h2>
         <p>
-          Placeholder close. This final area is prepared for stronger conversion messaging,
-          contact methods, or a tailored discovery call CTA.
+          Whether you need GHL workflows, AI automations, dashboards, or backend logic,
+          I can help turn messy operations into a cleaner system.
         </p>
-        <a href="mailto:dave@example.com" className="button button-primary">
-          Book the Build
-        </a>
+        <div className="hero-actions">
+          <a href="mailto:dave@example.com" className="button button-primary">
+            Contact Dave
+          </a>
+          <a href="#case-studies" className="button button-secondary">
+            View Portfolio Samples
+          </a>
+        </div>
       </div>
     </section>
   )

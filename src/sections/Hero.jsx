@@ -6,20 +6,27 @@ function Hero() {
   useScrollAnimation(ref)
 
   return (
-    <section ref={ref} className="content-section hero-section" id="hero">
-      <div className="section-copy hero-copy">
-        <p className="eyebrow">CRM Systems • Automation • Interactive Experiences</p>
-        <h1>GoHighLevel systems designed to feel premium, connected, and alive.</h1>
+    <section ref={ref} className="content-section hero-section panel-left" id="hero" data-stage="0">
+      <div className="section-panel hero-panel">
+        <p className="eyebrow">01 / Workflow Journey</p>
+        <h1>GoHighLevel Systems, AI Automations, and Custom CRM Dashboards</h1>
         <p className="lede">
-          This foundation pairs a cinematic 3D backdrop with clear sections for service
-          storytelling, case studies, and future portfolio proof.
+          I build CRM systems that automate lead flow, follow-ups, booking, reporting,
+          and client operations.
         </p>
+        <div className="hero-summary">
+          <span>Webhook</span>
+          <span>Lead Capture</span>
+          <span>Filter</span>
+          <span>GHL CRM</span>
+          <span>DaveOps Automation Hub</span>
+        </div>
         <div className="hero-actions">
-          <a href="#case-studies" className="button button-primary">
-            View Work
+          <a href="#ghl-systems" className="button button-primary">
+            View Workflow
           </a>
           <a href="#final-cta" className="button button-secondary">
-            Start a Build
+            Contact Me
           </a>
         </div>
       </div>
