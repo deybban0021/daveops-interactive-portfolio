@@ -19,8 +19,8 @@ function Scene() {
     <div className="scene-shell" aria-hidden="true">
       <Canvas dpr={[1, 1.5]} shadows>
         <color attach="background" args={['#07111d']} />
-        <fog attach="fog" args={['#07111d', 13.5, 20]} />
-        <PerspectiveCamera makeDefault position={[0.08, 0.03, 7.5]} fov={18.8} />
+        <fog attach="fog" args={['#07111d', 14, 21]} />
+        <PerspectiveCamera makeDefault position={[0.1, 0.04, 9.3]} fov={22.6} />
         <ambientLight intensity={1.18} />
         <directionalLight position={[2.8, 3.8, 6.4]} intensity={0.74} color="#8fdcff" castShadow />
         <pointLight position={[-3.2, 1.6, 4]} intensity={0.08} color="#d8f6ff" />

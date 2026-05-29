@@ -17,7 +17,7 @@
   --muted: #9ab7d2;
   --accent: #42c8ff;
   --accent-soft: #1f6f9f;
-  --max-width: 1280px;
+  --max-width: 1380px;
 }
 
 * {
@@ -116,7 +116,7 @@ a {
 }
 
 .hero-panel {
-  width: min(100%, 32.5rem);
+  width: min(100%, 27rem);
   padding: 1rem 1.15rem 1.1rem;
   background:
     linear-gradient(180deg, rgba(15, 25, 41, 0.9), rgba(10, 18, 30, 0.7)),
