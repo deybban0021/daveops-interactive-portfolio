@@ -6,8 +6,8 @@ function CameraParallax() {
   const { camera, pointer } = useThree()
 
   useFrame(() => {
-    camera.position.x += ((pointer.x || 0) * 0.07 - camera.position.x) * 0.04
-    camera.position.y += (0.1 + (pointer.y || 0) * 0.04 - camera.position.y) * 0.04
+    camera.position.x += ((pointer.x || 0) * 0.05 - camera.position.x) * 0.04
+    camera.position.y += (0.04 + (pointer.y || 0) * 0.03 - camera.position.y) * 0.04
     camera.lookAt(0, 0, 0)
   })
 
@@ -19,13 +19,13 @@ function Scene() {
     <div className="scene-shell" aria-hidden="true">
       <Canvas dpr={[1, 1.5]} shadows>
         <color attach="background" args={['#07111d']} />
-        <fog attach="fog" args={['#07111d', 11.5, 18]} />
-        <PerspectiveCamera makeDefault position={[0.06, 0.08, 7.3]} fov={23.5} />
-        <ambientLight intensity={1.16} />
-        <directionalLight position={[3.8, 5, 6.4]} intensity={0.9} color="#88dcff" castShadow />
-        <pointLight position={[-4.2, 2.2, 4.2]} intensity={0.16} color="#d8f6ff" />
-        <pointLight position={[3.4, -1.5, 3.8]} intensity={0.18} color="#2ea6ff" />
-        <pointLight position={[0.4, 1.5, 6.2]} intensity={0.16} color="#bcecff" />
+        <fog attach="fog" args={['#07111d', 12.5, 19.5]} />
+        <PerspectiveCamera makeDefault position={[0.02, 0.02, 8.9]} fov={19.5} />
+        <ambientLight intensity={1.12} />
+        <directionalLight position={[3.6, 4.6, 6.4]} intensity={0.84} color="#88dcff" castShadow />
+        <pointLight position={[-4.2, 2.2, 4.2]} intensity={0.12} color="#d8f6ff" />
+        <pointLight position={[3.4, -1.3, 3.8]} intensity={0.15} color="#2ea6ff" />
+        <pointLight position={[0.4, 1.2, 6.2]} intensity={0.12} color="#bcecff" />
         <CameraParallax />
         <AutomationDiagram />
       </Canvas>
