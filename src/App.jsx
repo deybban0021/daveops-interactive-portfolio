@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
-import Scene from './components/Scene'
 import Hero from './sections/Hero'
 import GHLSystems from './sections/GHLSystems'
 import AutomationBackend from './sections/AutomationBackend'
@@ -60,14 +59,11 @@ function App() {
   }, [])
 
   return (
-    <>
-      <Scene />
-      <div className="page-shell">
-        {sections.map((SectionComponent) => (
-          <SectionComponent key={SectionComponent.displayName || SectionComponent.name} />
-        ))}
-      </div>
-    </>
+    <div className="page-shell">
+      {sections.map((SectionComponent) => (
+        <SectionComponent key={SectionComponent.displayName || SectionComponent.name} />
+      ))}
+    </div>
   )
 }
 

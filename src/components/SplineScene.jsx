@@ -21,30 +21,29 @@ function SplineFallback() {
 
 function SplineScene({
   scene = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode',
+  className = '',
 }) {
   const [isReady, setIsReady] = useState(false)
 
   return (
-    <div className="hero-artwork-shell">
+    <motion.div
+      className={`hero-artwork-shell ${className}`.trim()}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
       <div className="hero-artwork-glow hero-artwork-glow--left" />
       <div className="hero-artwork-glow hero-artwork-glow--right" />
-      <motion.div
-        className="hero-artwork-frame"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <div className={`hero-artwork-surface${isReady ? ' is-ready' : ''}`}>
-          <Suspense fallback={<SplineFallback />}>
-            <Spline
-              scene={scene}
-              onLoad={() => setIsReady(true)}
-              className="hero-artwork-canvas"
-            />
-          </Suspense>
-        </div>
-      </motion.div>
-    </div>
+      <div className={`hero-artwork-surface${isReady ? ' is-ready' : ''}`}>
+        <Suspense fallback={<SplineFallback />}>
+          <Spline
+            scene={scene}
+            onLoad={() => setIsReady(true)}
+            className="hero-artwork-inner"
+          />
+        </Suspense>
+      </div>
+    </motion.div>
   )
 }
 
