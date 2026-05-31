@@ -10,9 +10,9 @@ function Hero() {
       <div className="hero-panel">
         <p className="eyebrow">DaveOps Portfolio</p>
         <h1>
-          I build GoHighLevel
+          I build GoHighLevel systems,
           <br />
-          systems, AI automations,
+          AI automations,
           <br />
           and CRM dashboards.
         </h1>

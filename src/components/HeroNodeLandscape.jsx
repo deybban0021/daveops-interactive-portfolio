@@ -1,359 +1,148 @@
 import { Line, RoundedBox } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import gsap from 'gsap'
-import * as THREE from 'three'
-
-const nodes = [
-  {
-    id: 'ingest',
-    position: [-2.9, -0.48, -0.08],
-    size: [0.74, 0.74, 0.12],
-    tone: 'muted',
-    delay: 0,
-  },
-  {
-    id: 'core',
-    position: [-1.42, -0.1, 0.04],
-    size: [1.2, 1.04, 0.16],
-    tone: 'accent',
-    delay: 0.08,
-  },
-  {
-    id: 'branch-top',
-    position: [0.2, -0.46, 0.08],
-    size: [0.92, 0.78, 0.12],
-    tone: 'muted',
-    delay: 0.16,
-  },
-  {
-    id: 'branch-mid',
-    position: [0.2, 0.42, -0.02],
-    size: [0.92, 0.78, 0.12],
-    tone: 'muted',
-    delay: 0.22,
-  },
-  {
-    id: 'stack',
-    position: [1.74, 0.08, 0.08],
-    size: [1.12, 0.98, 0.16],
-    tone: 'accent',
-    delay: 0.3,
-  },
-  {
-    id: 'report',
-    position: [3.35, 0.34, -0.02],
-    size: [1.62, 1.34, 0.18],
-    tone: 'hero',
-    delay: 0.38,
-  },
-]
-
-const wires = [
-  {
-    from: [-2.48, -0.48, -0.06],
-    mid: [-2.04, -0.34, 0.02],
-    to: [-1.98, -0.1, 0.04],
-  },
-  {
-    from: [-0.84, 0.04, 0.04],
-    mid: [-0.2, 0.36, 0.08],
-    to: [-0.26, 0.42, -0.02],
-  },
-  {
-    from: [-0.82, -0.14, 0.04],
-    mid: [-0.16, -0.42, 0.08],
-    to: [-0.26, -0.46, 0.08],
-  },
-  {
-    from: [0.66, 0.42, -0.02],
-    mid: [1.02, 0.3, 0.04],
-    to: [1.18, 0.18, 0.08],
-  },
-  {
-    from: [0.66, -0.46, 0.08],
-    mid: [1.08, -0.16, 0.08],
-    to: [1.18, -0.02, 0.08],
-  },
-  {
-    from: [2.3, 0.08, 0.08],
-    mid: [2.82, 0.18, 0.06],
-    to: [2.56, 0.34, -0.02],
-  },
-]
-
-function buildCurvePoints(from, mid, to, progress) {
-  const curve = new THREE.QuadraticBezierCurve3(
-    new THREE.Vector3(...from),
-    new THREE.Vector3(...mid),
-    new THREE.Vector3(...to),
-  )
-  const segments = 40
-  const safeProgress = Math.max(0.001, progress)
-  const raw = curve.getPoints(segments).map((point) => point.toArray())
-  const activeCount = Math.max(2, Math.ceil(segments * safeProgress) + 1)
-  const points = raw.slice(0, activeCount)
-  points[points.length - 1] = curve.getPoint(safeProgress).toArray()
-
-  return {
-    points,
-    pulse: curve.getPoint(Math.max(0.03, progress * 0.88)).toArray(),
-  }
-}
-
-function NodeBlock({ node, progress }) {
-  const ref = useRef(null)
-  const palette =
-    node.tone === 'hero'
-      ? {
-          shell: '#08131f',
-          face: '#0d1b2b',
-          glow: '#43c8ff',
-          border: '#8be7ff',
-        }
-      : node.tone === 'accent'
-        ? {
-            shell: '#09131f',
-            face: '#0b1827',
-            glow: '#35c0ff',
-            border: '#65d6ff',
-          }
-        : {
-            shell: '#0a1018',
-            face: '#0b1522',
-            glow: '#2599d9',
-            border: '#4eb6e6',
-          }
-
-  useFrame((state) => {
-    if (!ref.current) {
-      return
-    }
-
-    const hover = Math.sin(state.clock.elapsedTime * 0.42 + node.delay * 7) * 0.06
-    ref.current.position.y = node.position[1] + hover
-    ref.current.rotation.z = node.rotationZ + Math.sin(state.clock.elapsedTime * 0.22 + node.delay) * 0.012
-  })
-
-  const opacity = progress * (node.tone === 'muted' ? 0.6 : 0.84)
-
-  return (
-    <group
-      ref={ref}
-      position={node.position}
-      scale={0.84 + progress * 0.16}
-      rotation={[0, 0, node.tone === 'hero' ? -0.03 : node.tone === 'accent' ? -0.016 : 0.02]}
-    >
-      <mesh position={[0.14, -0.12, -0.16]}>
-        <planeGeometry args={[node.size[0] + 0.22, node.size[1] + 0.16]} />
-        <meshBasicMaterial color="#020712" transparent opacity={0.09 * progress} />
-      </mesh>
-      <RoundedBox args={node.size} radius={0.13} smoothness={8}>
-        <meshStandardMaterial
-          color={palette.shell}
-          metalness={0.26}
-          roughness={0.2}
-          emissive={palette.glow}
-          emissiveIntensity={0.015 * progress}
-          transparent
-          opacity={opacity}
-        />
-      </RoundedBox>
-      <mesh position={[0, 0, node.size[2] * 0.5 + 0.008]}>
-        <planeGeometry args={[node.size[0] - 0.1, node.size[1] - 0.1]} />
-        <meshBasicMaterial color={palette.face} transparent opacity={0.76 * progress} />
-      </mesh>
-      <mesh position={[0, node.size[1] * 0.34, node.size[2] * 0.5 + 0.014]}>
-        <boxGeometry args={[node.size[0] - 0.12, 0.035, 0.01]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.78 * progress} />
-      </mesh>
-      <mesh position={[-node.size[0] * 0.22, 0.02, node.size[2] * 0.5 + 0.018]}>
-        <boxGeometry args={[0.11, 0.11, 0.01]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.62 * progress} />
-      </mesh>
-      <mesh position={[node.size[0] * 0.14, 0.1, node.size[2] * 0.5 + 0.018]}>
-        <boxGeometry args={[node.size[0] * 0.38, 0.03, 0.01]} />
-        <meshBasicMaterial color="#ddecf6" transparent opacity={0.42 * progress} />
-      </mesh>
-      <mesh position={[node.size[0] * 0.12, -0.02, node.size[2] * 0.5 + 0.018]}>
-        <boxGeometry args={[node.size[0] * 0.44, 0.022, 0.01]} />
-        <meshBasicMaterial color="#79b9de" transparent opacity={0.3 * progress} />
-      </mesh>
-      <mesh position={[node.size[0] * 0.18, -0.16, node.size[2] * 0.5 + 0.018]}>
-        <boxGeometry args={[node.size[0] * 0.56, 0.014, 0.01]} />
-        <meshBasicMaterial color="#1f4c70" transparent opacity={0.18 * progress} />
-      </mesh>
-      <mesh position={[-node.size[0] * 0.52, 0, node.size[2] * 0.5]}>
-        <boxGeometry args={[0.03, 0.12, 0.05]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.44 * progress} />
-      </mesh>
-      <mesh position={[node.size[0] * 0.52, 0, node.size[2] * 0.5]}>
-        <boxGeometry args={[0.03, 0.12, 0.05]} />
-        <meshBasicMaterial color={palette.glow} transparent opacity={0.44 * progress} />
-      </mesh>
-    </group>
-  )
-}
-
-function Wire({ wire, progress, opacityMultiplier = 1, pulseOffset = 0 }) {
-  const { points, pulse } = useMemo(
-    () => buildCurvePoints(wire.from, wire.mid, wire.to, progress),
-    [wire.from, wire.mid, wire.to, progress],
-  )
-
-  const pulseRef = useRef(null)
-
-  useFrame((state) => {
-    if (!pulseRef.current) {
-      return
-    }
-
-    const shimmer = (Math.sin(state.clock.elapsedTime * 1.4 + pulseOffset) + 1) * 0.5
-    pulseRef.current.scale.setScalar(0.65 + shimmer * 0.26)
-  })
-
-  return (
-    <group>
-      <Line
-        points={points}
-        color="#8ce8ff"
-        lineWidth={1.8}
-        transparent
-        opacity={0.08 * progress * opacityMultiplier}
-      />
-      <Line
-        points={points}
-        color="#39bfff"
-        lineWidth={0.96}
-        transparent
-        opacity={0.5 * progress * opacityMultiplier}
-      />
-      <mesh ref={pulseRef} position={pulse}>
-        <sphereGeometry args={[0.038, 10, 10]} />
-        <meshBasicMaterial color="#86e8ff" transparent opacity={0.46 * progress * opacityMultiplier} />
-      </mesh>
-    </group>
-  )
-}
-
-function DotField() {
-  const positions = useMemo(() => {
-    const points = []
-    for (let x = -7; x <= 7; x += 0.58) {
-      for (let y = -3.4; y <= 3.4; y += 0.58) {
-        points.push([x, y, -1.2 + Math.sin(x * 0.3 + y * 0.24) * 0.06])
-      }
-    }
-    return points
-  }, [])
-
-  return (
-    <group>
-      {positions.map((point, index) => (
-        <mesh key={index} position={point}>
-          <circleGeometry args={[0.01, 8]} />
-          <meshBasicMaterial color="#1f6ba4" transparent opacity={0.24} />
-        </mesh>
-      ))}
-    </group>
-  )
-}
+import { useMemo, useRef } from 'react'
 
 function HeroNodeLandscape() {
-  const [intro, setIntro] = useState(() => ({
-    nodes: nodes.map(() => 0),
-    wires: wires.map(() => 0),
-  }))
-  const clusterRef = useRef(null)
-  const backdropRef = useRef(null)
-
-  useEffect(() => {
-    const state = {
-      nodes: nodes.map(() => 0),
-      wires: wires.map(() => 0),
-    }
-    setIntro(state)
-
-    const timeline = gsap.timeline({
-      defaults: { ease: 'power2.out' },
-      onUpdate: () => {
-        setIntro({
-          nodes: [...state.nodes],
-          wires: [...state.wires],
-        })
-      },
-    })
-
-    nodes.forEach((_, index) => {
-      timeline.to(
-        state.nodes,
-        {
-          [index]: 1,
-          duration: index === nodes.length - 1 ? 0.38 : 0.28,
-        },
-        index === 0 ? 0.04 : '+=0.06',
-      )
-
-      if (index < wires.length) {
-        timeline.to(state.wires, {
-          [index]: 1,
-          duration: 0.3,
-          ease: 'power3.out',
-        })
-      }
-    })
-
-    return () => timeline.kill()
-  }, [])
+  const rootRef = useRef(null)
+  const haloRef = useRef(null)
+  const frameRef = useRef(null)
+  const accentRef = useRef(null)
+  const arcs = useMemo(
+    () => [
+      [
+        [-1.8, -0.25, 0.1],
+        [-1.05, 0.25, 0.25],
+        [-0.25, 0.1, 0.16],
+      ],
+      [
+        [-0.1, 0.04, 0.12],
+        [0.78, -0.22, 0.2],
+        [1.58, -0.02, 0.14],
+      ],
+      [
+        [-0.45, -0.6, 0.05],
+        [0.2, -0.92, 0.1],
+        [1.15, -0.76, 0.06],
+      ],
+    ],
+    [],
+  )
 
   useFrame((state) => {
-    if (clusterRef.current) {
-      clusterRef.current.position.y = -0.18 + Math.sin(state.clock.elapsedTime * 0.28) * 0.06
-      clusterRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.12) * 0.012
+    const t = state.clock.elapsedTime
+
+    if (rootRef.current) {
+      rootRef.current.position.y = -0.08 + Math.sin(t * 0.22) * 0.05
+      rootRef.current.rotation.z = Math.sin(t * 0.1) * 0.012
     }
 
-    if (backdropRef.current) {
-      backdropRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.08) * 0.004
+    if (haloRef.current) {
+      haloRef.current.scale.x = 1 + Math.sin(t * 0.32) * 0.04
+      haloRef.current.scale.y = 1 + Math.cos(t * 0.24) * 0.05
+    }
+
+    if (frameRef.current) {
+      frameRef.current.rotation.z = -0.08 + Math.sin(t * 0.16) * 0.01
+    }
+
+    if (accentRef.current) {
+      accentRef.current.position.x = 1.44 + Math.sin(t * 0.3) * 0.06
+      accentRef.current.position.y = -0.12 + Math.cos(t * 0.34) * 0.04
     }
   })
 
   return (
-    <group>
-      <group ref={backdropRef} position={[0.32, -0.2, -2.4]}>
-        <DotField />
-        <mesh position={[-0.4, -0.2, -0.2]}>
-          <planeGeometry args={[14.4, 6.8]} />
-          <meshBasicMaterial color="#07111d" transparent opacity={0.06} />
-        </mesh>
-        <mesh position={[2.6, -1.4, -0.06]}>
-          <planeGeometry args={[5.2, 1.2]} />
-          <meshBasicMaterial color="#0a1523" transparent opacity={0.18} />
-        </mesh>
-        <mesh position={[-1.8, -1.62, -0.04]}>
-          <planeGeometry args={[4.4, 1.1]} />
-          <meshBasicMaterial color="#0b1626" transparent opacity={0.14} />
-        </mesh>
-        <mesh position={[0.2, 1.34, -0.04]}>
-          <planeGeometry args={[6.2, 1.6]} />
-          <meshBasicMaterial color="#0f2135" transparent opacity={0.08} />
+    <group ref={rootRef} position={[0.95, -0.08, -0.5]}>
+      {/* Future 3D/Spline node sculpture goes here */}
+      <mesh ref={haloRef} position={[0.42, -0.08, -1.4]}>
+        <circleGeometry args={[3.9, 64]} />
+        <meshBasicMaterial color="#163554" transparent opacity={0.18} />
+      </mesh>
+
+      <mesh position={[0.7, -0.3, -1.2]} rotation={[0, 0, -0.2]}>
+        <planeGeometry args={[7.4, 4.2]} />
+        <meshBasicMaterial color="#08111d" transparent opacity={0.34} />
+      </mesh>
+
+      <group ref={frameRef} position={[0.86, -0.16, -0.34]}>
+        <RoundedBox args={[5.6, 2.55, 0.05]} radius={0.2} smoothness={6}>
+          <meshBasicMaterial color="#08121d" transparent opacity={0.18} />
+        </RoundedBox>
+        <mesh position={[0, 0, 0.035]}>
+          <planeGeometry args={[5.18, 2.16]} />
+          <meshBasicMaterial color="#0d1d2d" transparent opacity={0.2} />
         </mesh>
       </group>
 
-      <group ref={clusterRef} position={[0.86, -0.18, 0]}>
-        {wires.map((wire, index) => (
-          <Wire
-            key={`wire-${index}`}
-            wire={wire}
-            progress={intro.wires[index]}
-            opacityMultiplier={index === wires.length - 1 ? 0.9 : 0.72}
-            pulseOffset={index * 0.5}
+      <group position={[-0.38, -0.05, 0.16]}>
+        <RoundedBox args={[1.48, 0.84, 0.12]} radius={0.18} smoothness={8}>
+          <meshStandardMaterial
+            color="#0a1522"
+            transparent
+            opacity={0.36}
+            roughness={0.16}
+            metalness={0.24}
+            emissive="#2bb6ff"
+            emissiveIntensity={0.02}
           />
-        ))}
-
-        {nodes.map((node, index) => (
-          <NodeBlock key={node.id} node={node} progress={intro.nodes[index]} />
-        ))}
+        </RoundedBox>
+        <mesh position={[0, 0, 0.075]}>
+          <planeGeometry args={[1.22, 0.6]} />
+          <meshBasicMaterial color="#102235" transparent opacity={0.34} />
+        </mesh>
       </group>
+
+      <group position={[1.74, -0.1, 0.24]}>
+        <RoundedBox args={[1.92, 1.12, 0.14]} radius={0.2} smoothness={8}>
+          <meshStandardMaterial
+            color="#091421"
+            transparent
+            opacity={0.46}
+            roughness={0.16}
+            metalness={0.28}
+            emissive="#5ad2ff"
+            emissiveIntensity={0.028}
+          />
+        </RoundedBox>
+        <mesh position={[0, 0, 0.086]}>
+          <planeGeometry args={[1.58, 0.8]} />
+          <meshBasicMaterial color="#12263b" transparent opacity={0.34} />
+        </mesh>
+        <mesh position={[-0.36, 0.2, 0.094]}>
+          <boxGeometry args={[0.14, 0.14, 0.01]} />
+          <meshBasicMaterial color="#86e9ff" transparent opacity={0.5} />
+        </mesh>
+        <mesh position={[0.15, 0.1, 0.094]}>
+          <boxGeometry args={[0.62, 0.035, 0.01]} />
+          <meshBasicMaterial color="#dff6ff" transparent opacity={0.3} />
+        </mesh>
+        <mesh position={[0.22, -0.07, 0.094]}>
+          <boxGeometry args={[0.76, 0.02, 0.01]} />
+          <meshBasicMaterial color="#5d92b7" transparent opacity={0.22} />
+        </mesh>
+      </group>
+
+      <mesh ref={accentRef} position={[1.44, -0.12, 0.46]}>
+        <sphereGeometry args={[0.16, 22, 22]} />
+        <meshBasicMaterial color="#6ae0ff" transparent opacity={0.42} />
+      </mesh>
+
+      <mesh position={[-0.92, -0.66, -0.08]} rotation={[0, 0, -0.42]}>
+        <planeGeometry args={[2.8, 0.72]} />
+        <meshBasicMaterial color="#09131e" transparent opacity={0.26} />
+      </mesh>
+
+      <mesh position={[1.42, -0.98, -0.2]} rotation={[0, 0, 0.16]}>
+        <planeGeometry args={[3.4, 0.9]} />
+        <meshBasicMaterial color="#09131e" transparent opacity={0.24} />
+      </mesh>
+
+      {arcs.map((points, index) => (
+        <group key={index}>
+          <Line points={points} color="#8ce8ff" lineWidth={1.25} transparent opacity={0.08} />
+          <Line points={points} color="#3dc5ff" lineWidth={0.8} transparent opacity={0.4} />
+        </group>
+      ))}
     </group>
   )
 }
