@@ -168,8 +168,10 @@ a {
 
 .hero-section {
   padding-top: 2.5rem;
-  padding-left: 0;
-  width: min(calc(100% - 1.6rem), 1560px);
+  padding-left: clamp(1rem, 3vw, 2.8rem);
+  padding-right: clamp(1rem, 3vw, 2.8rem);
+  width: 100%;
+  max-width: none;
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -202,7 +204,7 @@ a {
 }
 
 .hero-panel {
-  width: min(100%, 82rem);
+  width: 100%;
   padding: 2.6rem 0 2.4rem;
   background:
     radial-gradient(circle at 66% 50%, rgba(44, 142, 214, 0.18), transparent 26%),
@@ -212,7 +214,7 @@ a {
   box-shadow: none;
   backdrop-filter: none;
   position: relative;
-  min-height: 88vh;
+  min-height: calc(100vh - 5rem);
 }
 
 .hero-panel::after {
@@ -228,20 +230,21 @@ a {
 
 .hero-stage {
   position: relative;
-  min-height: 82vh;
+  min-height: calc(100vh - 8rem);
+  width: 100%;
 }
 
 .hero-copy {
   position: relative;
   z-index: 3;
   width: min(100%, 52rem);
-  padding: 4.2rem 1rem 2rem 0.6rem;
+  padding: 4.2rem 1rem 2rem clamp(0.2rem, 2vw, 1.4rem);
   pointer-events: none;
 }
 
 .hero-visual {
   position: absolute;
-  inset: -2rem -4rem -2rem -3rem;
+  inset: -2rem -2rem -2rem -2rem;
   z-index: 2;
   pointer-events: auto;
 }
@@ -472,6 +475,12 @@ p {
   .content-section {
     width: min(calc(100% - 1.2rem), var(--max-width));
     padding: 4.75rem 0 2.6rem;
+  }
+
+  .hero-section {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .hero-panel {
