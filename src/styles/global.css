@@ -167,7 +167,8 @@ a {
 }
 
 .hero-section {
-  padding-top: 2.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
   padding-left: clamp(1rem, 3vw, 2.8rem);
   padding-right: clamp(1rem, 3vw, 2.8rem);
   width: 100%;
@@ -175,6 +176,7 @@ a {
   align-items: center;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .section-panel {
@@ -205,7 +207,7 @@ a {
 
 .hero-panel {
   width: 100%;
-  padding: 2.6rem 0 2.4rem;
+  padding: 0;
   background:
     radial-gradient(circle at 66% 50%, rgba(44, 142, 214, 0.18), transparent 26%),
     radial-gradient(circle at 38% 34%, rgba(60, 200, 255, 0.1), transparent 22%),
@@ -214,7 +216,7 @@ a {
   box-shadow: none;
   backdrop-filter: none;
   position: relative;
-  min-height: calc(100vh - 5rem);
+  min-height: 100vh;
 }
 
 .hero-panel::after {
@@ -230,7 +232,7 @@ a {
 
 .hero-stage {
   position: relative;
-  min-height: calc(100vh - 8rem);
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -238,7 +240,7 @@ a {
   position: relative;
   z-index: 3;
   width: min(100%, 52rem);
-  padding: 4.2rem 1rem 2rem clamp(0.2rem, 2vw, 1.4rem);
+  padding: clamp(1.4rem, 3vh, 2.25rem) 1rem 2rem clamp(0.2rem, 2vw, 1.4rem);
   pointer-events: none;
 }
 
@@ -447,7 +449,7 @@ p {
   }
 
   .hero-panel {
-    min-height: 78vh;
+    min-height: 100vh;
   }
 
   .hero-copy {
@@ -479,20 +481,23 @@ p {
 
   .hero-section {
     width: 100%;
+    min-height: 100vh;
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
   .hero-panel {
-    min-height: auto;
+    min-height: 100vh;
   }
 
   .hero-stage {
-    min-height: auto;
+    min-height: 100vh;
   }
 
   .hero-copy {
-    padding: 1.8rem 0 26rem;
+    padding: 1.2rem 0 26rem;
     width: 100%;
   }
 
