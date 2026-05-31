@@ -55,6 +55,7 @@ a {
   inset: 0;
   opacity: 0.92;
   transition: opacity 0.5s ease;
+  overflow: visible;
 }
 
 .hero-artwork-surface.is-ready {
@@ -235,23 +236,25 @@ a {
   z-index: 3;
   width: min(100%, 52rem);
   padding: 4.2rem 1rem 2rem 0.6rem;
+  pointer-events: none;
 }
 
 .hero-visual {
   position: absolute;
-  inset: 0;
+  inset: -2rem -4rem -2rem -3rem;
   z-index: 2;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .hero-artwork-shell {
   position: absolute;
-  inset: 2rem -3rem 0 18%;
+  inset: 0;
   pointer-events: auto;
 }
 
 .hero-artwork-canvas {
   pointer-events: auto;
+  touch-action: none;
 }
 
 .eyebrow,
@@ -280,6 +283,7 @@ h1 {
   text-shadow: 0 28px 84px rgba(0, 0, 0, 0.42);
   position: relative;
   z-index: 4;
+  pointer-events: none;
 }
 
 h2 {
@@ -306,6 +310,7 @@ p {
   text-shadow: 0 10px 38px rgba(0, 0, 0, 0.18);
   position: relative;
   z-index: 4;
+  pointer-events: none;
 }
 
 .hero-summary {
@@ -315,6 +320,7 @@ p {
   margin: 1.7rem 0 0;
   position: relative;
   z-index: 4;
+  pointer-events: none;
 }
 
 .hero-summary span {
@@ -333,6 +339,11 @@ p {
   margin-top: 1.75rem;
   position: relative;
   z-index: 4;
+  pointer-events: auto;
+}
+
+.eyebrow {
+  pointer-events: none;
 }
 
 .button {
@@ -442,7 +453,7 @@ p {
   }
 
   .hero-artwork-shell {
-    inset: 10rem -7rem -1rem 34%;
+    inset: 0;
   }
 
   .bullet-grid.two-col,
@@ -478,12 +489,12 @@ p {
 
   .hero-visual {
     position: absolute;
-    inset: auto 0 0;
+    inset: auto -1rem -1rem -1rem;
     min-height: 22rem;
   }
 
   .hero-artwork-shell {
-    inset: auto -2rem -5rem -1rem;
+    inset: 0;
     height: 28rem;
   }
 
