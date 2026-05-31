@@ -14,59 +14,59 @@ const heroNodes = [
     title: 'Lead Flow',
     subtitle: 'Capture + routing',
     meta: 'Forms, funnels, handoff',
-    position: [-1.55, -0.14, 0.02],
-    rotation: [0, 0, -0.012],
+    position: [-2.75, -0.78, -0.02],
+    rotation: [0, 0, -0.08],
     tone: 'default',
-    scale: 0.74,
+    scale: 0.94,
     detailLevel: 'ambient',
-    emphasis: 0.24,
+    emphasis: 0.22,
   },
   {
     id: 'lead-capture',
     title: 'GHL Systems',
     subtitle: 'Pipelines + automation',
     meta: 'CRM, calendars, workflows',
-    position: [-0.6, 0.22, 0.04],
-    rotation: [0, 0, -0.006],
+    position: [-1.15, 0.22, 0.02],
+    rotation: [0, 0, -0.03],
     tone: 'accent',
-    scale: 0.82,
-    detailLevel: 'full',
-    emphasis: 0.46,
+    scale: 1.06,
+    detailLevel: 'ambient',
+    emphasis: 0.3,
   },
   {
     id: 'filter',
     title: 'n8n Logic',
     subtitle: 'Webhook orchestration',
     meta: 'Backend actions + sync',
-    position: [0.22, 0.48, 0.03],
-    rotation: [0, 0, 0.01],
+    position: [0.15, 0.88, 0.01],
+    rotation: [0, 0, 0.015],
     tone: 'default',
-    scale: 0.72,
+    scale: 0.82,
     detailLevel: 'ambient',
-    emphasis: 0.22,
+    emphasis: 0.26,
   },
   {
     id: 'ghl-crm',
     title: 'AI Layer',
     subtitle: 'Assistants + prompts',
     meta: 'Chat, support, decisions',
-    position: [1.08, 0.12, 0.04],
-    rotation: [0, 0, 0.004],
+    position: [1.55, 0.18, 0.02],
+    rotation: [0, 0, 0.025],
     tone: 'accent',
-    scale: 0.76,
-    detailLevel: 'full',
-    emphasis: 0.34,
+    scale: 0.98,
+    detailLevel: 'ambient',
+    emphasis: 0.28,
   },
   {
     id: 'daveops-hub',
     title: 'Reporting',
     subtitle: 'Dashboards + insights',
     meta: 'Tracking, stats, visibility',
-    position: [1.95, -0.08, 0.03],
-    rotation: [0, 0, -0.004],
+    position: [3.05, -0.58, 0.02],
+    rotation: [0, 0, -0.035],
     tone: 'hub',
-    scale: 0.96,
-    emphasis: 0.5,
+    scale: 1.2,
+    emphasis: 0.34,
   },
 ]
 
@@ -89,53 +89,61 @@ const heroConnections = heroNodes.slice(0, -1).map((node, index) => {
   return {
     from,
     to,
-    mid: [from[0] + span * 0.5, Math.max(from[1], to[1]) + 0.12, (from[2] + to[2]) / 2],
+    mid: [
+      from[0] + span * 0.5,
+      Math.max(from[1], to[1]) + (index === 1 ? 0.42 : 0.24),
+      (from[2] + to[2]) / 2,
+    ],
   }
 })
 
 function BackgroundField() {
   return (
-    <group position={[0.08, 0.04, -0.12]} rotation={[0, 0, -0.001]}>
-      <mesh position={[0.18, -0.04, -0.04]}>
-        <planeGeometry args={[11.6, 4.8]} />
-        <meshBasicMaterial color="#07111d" transparent opacity={0.018} />
+    <group position={[0.22, -0.06, -0.18]} rotation={[0, 0, -0.001]}>
+      <mesh position={[0.2, -0.08, -0.04]}>
+        <planeGeometry args={[13.2, 5.6]} />
+        <meshBasicMaterial color="#07111d" transparent opacity={0.015} />
       </mesh>
-      <mesh position={[-1.5, 0.36, -0.02]}>
-        <planeGeometry args={[3.8, 1.8]} />
-        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.03} />
+      <mesh position={[-0.2, -0.72, -0.03]}>
+        <planeGeometry args={[8.8, 2.6]} />
+        <meshBasicMaterial color="#0b1421" transparent opacity={0.08} />
       </mesh>
-      <mesh position={[0.75, 0.58, -0.02]}>
-        <planeGeometry args={[4.4, 2.1]} />
-        <meshBasicMaterial color="#14263b" transparent opacity={0.028} />
+      <mesh position={[-1.6, -0.24, -0.02]}>
+        <planeGeometry args={[3.4, 1.82]} />
+        <meshBasicMaterial color="#122133" transparent opacity={0.05} />
       </mesh>
-      <mesh position={[2.68, -0.22, -0.01]}>
-        <planeGeometry args={[3.2, 1.42]} />
-        <meshBasicMaterial color="#16304b" transparent opacity={0.03} />
+      <mesh position={[0.85, 0.48, -0.02]}>
+        <planeGeometry args={[4.8, 2.4]} />
+        <meshBasicMaterial color="#122133" transparent opacity={0.045} />
       </mesh>
-      <group position={[0.18, 0.02, 0.001]}>
-        {[-3.3, -1.9, -0.2, 1.5, 3.1].map((x) => (
+      <mesh position={[3.1, -0.38, -0.01]}>
+        <planeGeometry args={[3.8, 1.64]} />
+        <meshBasicMaterial color="#16304b" transparent opacity={0.05} />
+      </mesh>
+      <group position={[0.24, 0.1, 0.001]}>
+        {[-4.0, -2.4, -0.8, 1.0, 2.8, 4.3].map((x) => (
           <mesh key={`v-${x}`} position={[x, 0, 0]}>
-            <planeGeometry args={[0.006, 2.5]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.03} />
+            <planeGeometry args={[0.005, 3.0]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.028} />
           </mesh>
         ))}
-        {[-0.82, -0.18, 0.34, 0.92].map((y) => (
+        {[-1.0, -0.34, 0.32, 1.0].map((y) => (
           <mesh key={`h-${y}`} position={[0, y, 0]}>
-            <planeGeometry args={[8.8, 0.006]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.03} />
+            <planeGeometry args={[10.6, 0.005]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.026} />
           </mesh>
         ))}
       </group>
-      <mesh position={[-2.12, 0.98, -0.01]}>
-        <boxGeometry args={[1.02, 0.018, 0.004]} />
+      <mesh position={[-2.92, 1.18, -0.01]}>
+        <boxGeometry args={[1.34, 0.016, 0.004]} />
         <meshBasicMaterial color="#2a5f8d" transparent opacity={0.12} />
       </mesh>
-      <mesh position={[-1.58, 0.98, 0]}>
-        <boxGeometry args={[0.34, 0.018, 0.004]} />
-        <meshBasicMaterial color="#7fe6ff" transparent opacity={0.34} />
+      <mesh position={[-2.3, 1.18, 0]}>
+        <boxGeometry args={[0.44, 0.016, 0.004]} />
+        <meshBasicMaterial color="#7fe6ff" transparent opacity={0.28} />
       </mesh>
-      <mesh position={[2.8, -0.68, -0.01]}>
-        <boxGeometry args={[1.42, 0.014, 0.004]} />
+      <mesh position={[4.0, -1.02, -0.01]}>
+        <boxGeometry args={[1.82, 0.012, 0.004]} />
         <meshBasicMaterial color="#214666" transparent opacity={0.1} />
       </mesh>
     </group>
@@ -284,7 +292,7 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.96} rotation={[-0.06, 0, -0.006]} position={[0.12, 0.02, 0]}>
+    <group scale={1.18} rotation={[-0.05, 0, -0.006]} position={[0.62, -0.06, 0]}>
       <BackgroundField />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (

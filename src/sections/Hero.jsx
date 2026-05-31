@@ -7,7 +7,7 @@ function Hero() {
 
   return (
     <section ref={ref} className="content-section hero-section panel-left" id="hero" data-stage="0">
-      <div className="section-panel hero-panel">
+      <div className="hero-panel">
         <p className="eyebrow">DaveOps Portfolio</p>
         <h1>I build GoHighLevel systems, AI automations, and CRM dashboards.</h1>
         <p className="lede">
