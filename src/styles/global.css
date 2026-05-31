@@ -117,9 +117,10 @@ a {
 }
 
 .hero-panel {
-  width: min(100%, 49rem);
-  padding: 1rem 1rem 1.2rem;
-  background: linear-gradient(90deg, rgba(6, 13, 23, 0.88), rgba(6, 13, 23, 0.28) 58%, rgba(6, 13, 23, 0));
+  width: min(100%, 56rem);
+  padding: 1.1rem 1.1rem 1.35rem;
+  background:
+    linear-gradient(90deg, rgba(6, 13, 23, 0.92), rgba(6, 13, 23, 0.38) 48%, rgba(6, 13, 23, 0.06) 72%, rgba(6, 13, 23, 0));
   border: none;
   box-shadow: none;
   backdrop-filter: none;
@@ -143,11 +144,11 @@ p {
 }
 
 h1 {
-  font-size: clamp(4rem, 9vw, 7.8rem);
-  line-height: 0.88;
+  font-size: clamp(3.8rem, 8.2vw, 7rem);
+  line-height: 0.9;
   letter-spacing: -0.05em;
   margin-bottom: 1rem;
-  max-width: 7ch;
+  max-width: 9.4ch;
   text-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
 }
 
@@ -169,7 +170,7 @@ p {
 }
 
 .lede {
-  max-width: 32rem;
+  max-width: 30rem;
   font-size: 1.02rem;
   line-height: 1.68;
 }

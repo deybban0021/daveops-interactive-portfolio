@@ -17,6 +17,7 @@ function FloatingCard({
 }) {
   const groupRef = useRef(null)
   const isAmbient = detailLevel === 'ambient'
+  const isGhost = detailLevel === 'ghost'
   const palette =
     tone === 'accent'
       ? {
@@ -72,7 +73,7 @@ function FloatingCard({
           emissive={palette.glow}
           emissiveIntensity={0.01 * progress * emphasis}
           transparent
-          opacity={(0.34 + progress * 0.28) * emphasis}
+          opacity={(isGhost ? 0.18 : 0.34 + progress * 0.28) * emphasis}
         />
       </RoundedBox>
       <mesh position={[0, 0, 0.012]}>
@@ -87,17 +88,23 @@ function FloatingCard({
           opacity={(isAmbient ? 0.42 : 0.66) * progress * emphasis}
         />
       </mesh>
-      <mesh position={[0, 0.21, 0.018]}>
-        <planeGeometry args={[1.12, 0.16]} />
-        <meshBasicMaterial
-          color={palette.panelSoft}
-          transparent
-          opacity={(isAmbient ? 0.22 : 0.46) * progress * emphasis}
-        />
-      </mesh>
+      {!isGhost && (
+        <mesh position={[0, 0.21, 0.018]}>
+          <planeGeometry args={[1.12, 0.16]} />
+          <meshBasicMaterial
+            color={palette.panelSoft}
+            transparent
+            opacity={(isAmbient ? 0.18 : 0.46) * progress * emphasis}
+          />
+        </mesh>
+      )}
       <mesh position={[0, 0.32, 0.02]}>
         <boxGeometry args={[1.16, 0.022, 0.006]} />
-        <meshBasicMaterial color={palette.border} transparent opacity={0.7 * progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.border}
+          transparent
+          opacity={(isGhost ? 0.34 : 0.7) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0, -0.35, 0.02]}>
         <boxGeometry args={[1.14, 0.012, 0.006]} />
@@ -105,28 +112,50 @@ function FloatingCard({
       </mesh>
       <mesh position={[-0.41, 0.06, 0.022]}>
         <boxGeometry args={[0.18, 0.18, 0.006]} />
-        <meshBasicMaterial color={palette.strip} transparent opacity={progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.strip}
+          transparent
+          opacity={(isGhost ? 0.42 : 1) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[-0.41, 0.06, 0.028]}>
         <boxGeometry args={[0.08, 0.08, 0.006]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.accent}
+          transparent
+          opacity={(isGhost ? 0.52 : 1) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0.1, 0.12, 0.024]}>
         <boxGeometry args={[0.52, 0.034, 0.006]} />
-        <meshBasicMaterial color={palette.text} transparent opacity={0.84 * progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.text}
+          transparent
+          opacity={(isGhost ? 0.44 : 0.84) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0.13, 0.03, 0.024]}>
         <boxGeometry args={[0.6, 0.02, 0.006]} />
-        <meshBasicMaterial color={palette.meta} transparent opacity={0.56 * progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.meta}
+          transparent
+          opacity={(isGhost ? 0.3 : 0.56) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0.06, -0.08, 0.024]}>
         <boxGeometry args={[0.74, 0.012, 0.006]} />
         <meshBasicMaterial color={palette.border} transparent opacity={0.18 * progress * emphasis} />
       </mesh>
-      <mesh position={[0.0, -0.17, 0.024]}>
-        <boxGeometry args={[0.94, 0.14, 0.006]} />
-        <meshBasicMaterial color={palette.panelMuted} transparent opacity={0.62 * progress * emphasis} />
-      </mesh>
+      {!isGhost && (
+        <mesh position={[0.0, -0.17, 0.024]}>
+          <boxGeometry args={[0.94, 0.14, 0.006]} />
+          <meshBasicMaterial
+            color={palette.panelMuted}
+            transparent
+            opacity={(isAmbient ? 0.44 : 0.62) * progress * emphasis}
+          />
+        </mesh>
+      )}
       <mesh position={[-0.39, -0.17, 0.03]}>
         <boxGeometry args={[0.05, 0.05, 0.006]} />
         <meshBasicMaterial color={palette.glow} transparent opacity={progress * emphasis} />
@@ -163,7 +192,7 @@ function FloatingCard({
           </mesh>
         </>
       )}
-      {!isAmbient && (
+      {!isAmbient && !isGhost && (
         <>
           <Text
             position={[0.0, 0.105, 0.03]}
