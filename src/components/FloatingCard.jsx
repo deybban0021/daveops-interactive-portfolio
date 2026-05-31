@@ -16,6 +16,7 @@ function FloatingCard({
   emphasis = 1,
 }) {
   const groupRef = useRef(null)
+  const isAmbient = detailLevel === 'ambient'
   const palette =
     tone === 'accent'
       ? {
@@ -80,11 +81,19 @@ function FloatingCard({
       </mesh>
       <mesh position={[0, 0, 0.016]}>
         <planeGeometry args={[1.2, 0.68]} />
-        <meshBasicMaterial color={palette.panel} transparent opacity={0.66 * progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.panel}
+          transparent
+          opacity={(isAmbient ? 0.42 : 0.66) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0, 0.21, 0.018]}>
         <planeGeometry args={[1.12, 0.16]} />
-        <meshBasicMaterial color={palette.panelSoft} transparent opacity={0.46 * progress * emphasis} />
+        <meshBasicMaterial
+          color={palette.panelSoft}
+          transparent
+          opacity={(isAmbient ? 0.22 : 0.46) * progress * emphasis}
+        />
       </mesh>
       <mesh position={[0, 0.32, 0.02]}>
         <boxGeometry args={[1.16, 0.022, 0.006]} />
@@ -154,42 +163,46 @@ function FloatingCard({
           </mesh>
         </>
       )}
-      <Text
-        position={[0.0, 0.105, 0.03]}
-        fontSize={0.09}
-        maxWidth={0.72}
-        lineHeight={1.08}
-        color={palette.text}
-        anchorX="left"
-        anchorY="middle"
-        fillOpacity={progress * emphasis}
-      >
-        {title}
-      </Text>
-      <Text
-        position={[0.0, -0.005, 0.03]}
-        fontSize={0.044}
-        maxWidth={0.74}
-        lineHeight={1.08}
-        color={palette.meta}
-        anchorX="left"
-        anchorY="middle"
-        fillOpacity={0.74 * progress * emphasis}
-      >
-        {subtitle}
-      </Text>
-      <Text
-        position={[0.03, -0.17, 0.03]}
-        fontSize={0.036}
-        maxWidth={0.76}
-        lineHeight={1}
-        color="#d7f5ff"
-        anchorX="center"
-        anchorY="middle"
-        fillOpacity={0.84 * progress * emphasis}
-      >
-        {meta}
-      </Text>
+      {!isAmbient && (
+        <>
+          <Text
+            position={[0.0, 0.105, 0.03]}
+            fontSize={0.09}
+            maxWidth={0.72}
+            lineHeight={1.08}
+            color={palette.text}
+            anchorX="left"
+            anchorY="middle"
+            fillOpacity={progress * emphasis}
+          >
+            {title}
+          </Text>
+          <Text
+            position={[0.0, -0.005, 0.03]}
+            fontSize={0.044}
+            maxWidth={0.74}
+            lineHeight={1.08}
+            color={palette.meta}
+            anchorX="left"
+            anchorY="middle"
+            fillOpacity={0.74 * progress * emphasis}
+          >
+            {subtitle}
+          </Text>
+          <Text
+            position={[0.03, -0.17, 0.03]}
+            fontSize={0.036}
+            maxWidth={0.76}
+            lineHeight={1}
+            color="#d7f5ff"
+            anchorX="center"
+            anchorY="middle"
+            fillOpacity={0.84 * progress * emphasis}
+          >
+            {meta}
+          </Text>
+        </>
+      )}
     </group>
   )
 }

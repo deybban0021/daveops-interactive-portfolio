@@ -14,59 +14,59 @@ const heroNodes = [
     title: 'Lead Flow',
     subtitle: 'Capture + routing',
     meta: 'Forms, funnels, handoff',
-    position: [-1.48, 0.2, 0.04],
+    position: [-1.55, -0.14, 0.02],
     rotation: [0, 0, -0.012],
     tone: 'default',
-    scale: 0.66,
-    detailLevel: 'full',
-    emphasis: 0.48,
+    scale: 0.74,
+    detailLevel: 'ambient',
+    emphasis: 0.24,
   },
   {
     id: 'lead-capture',
     title: 'GHL Systems',
     subtitle: 'Pipelines + automation',
     meta: 'CRM, calendars, workflows',
-    position: [-0.56, 0.18, 0.05],
+    position: [-0.6, 0.22, 0.04],
     rotation: [0, 0, -0.006],
     tone: 'accent',
-    scale: 0.7,
+    scale: 0.82,
     detailLevel: 'full',
-    emphasis: 0.88,
+    emphasis: 0.46,
   },
   {
     id: 'filter',
     title: 'n8n Logic',
     subtitle: 'Webhook orchestration',
     meta: 'Backend actions + sync',
-    position: [0.34, 0.26, 0.04],
-    rotation: [0, 0, 0.008],
+    position: [0.22, 0.48, 0.03],
+    rotation: [0, 0, 0.01],
     tone: 'default',
-    scale: 0.66,
-    detailLevel: 'full',
-    emphasis: 0.42,
+    scale: 0.72,
+    detailLevel: 'ambient',
+    emphasis: 0.22,
   },
   {
     id: 'ghl-crm',
     title: 'AI Layer',
     subtitle: 'Assistants + prompts',
     meta: 'Chat, support, decisions',
-    position: [1.18, 0.12, 0.05],
+    position: [1.08, 0.12, 0.04],
     rotation: [0, 0, 0.004],
     tone: 'accent',
-    scale: 0.7,
+    scale: 0.76,
     detailLevel: 'full',
-    emphasis: 0.7,
+    emphasis: 0.34,
   },
   {
     id: 'daveops-hub',
     title: 'Reporting',
     subtitle: 'Dashboards + insights',
     meta: 'Tracking, stats, visibility',
-    position: [1.98, 0.02, 0.06],
+    position: [1.95, -0.08, 0.03],
     rotation: [0, 0, -0.004],
     tone: 'hub',
-    scale: 0.72,
-    emphasis: 0.94,
+    scale: 0.96,
+    emphasis: 0.5,
   },
 ]
 
@@ -95,44 +95,48 @@ const heroConnections = heroNodes.slice(0, -1).map((node, index) => {
 
 function BackgroundField() {
   return (
-    <group position={[0.3, 0.02, -0.08]} rotation={[0, 0, -0.002]}>
-      <mesh position={[0.1, -0.02, -0.04]}>
-        <planeGeometry args={[8.8, 3.0]} />
-        <meshBasicMaterial color="#07111d" transparent opacity={0.02} />
+    <group position={[0.08, 0.04, -0.12]} rotation={[0, 0, -0.001]}>
+      <mesh position={[0.18, -0.04, -0.04]}>
+        <planeGeometry args={[11.6, 4.8]} />
+        <meshBasicMaterial color="#07111d" transparent opacity={0.018} />
       </mesh>
-      <mesh position={[1.2, 0.06, -0.02]}>
-        <planeGeometry args={[5.8, 1.92]} />
-        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.04} />
+      <mesh position={[-1.5, 0.36, -0.02]}>
+        <planeGeometry args={[3.8, 1.8]} />
+        <meshBasicMaterial color="#0f1a2a" transparent opacity={0.03} />
       </mesh>
-      <mesh position={[2.0, 0.08, -0.01]}>
-        <planeGeometry args={[2.6, 1.08]} />
-        <meshBasicMaterial color="#16304b" transparent opacity={0.05} />
+      <mesh position={[0.75, 0.58, -0.02]}>
+        <planeGeometry args={[4.4, 2.1]} />
+        <meshBasicMaterial color="#14263b" transparent opacity={0.028} />
       </mesh>
-      <group position={[0, 0, 0.001]}>
-        {[-2.2, -1.0, 0.2, 1.4, 2.6].map((x) => (
+      <mesh position={[2.68, -0.22, -0.01]}>
+        <planeGeometry args={[3.2, 1.42]} />
+        <meshBasicMaterial color="#16304b" transparent opacity={0.03} />
+      </mesh>
+      <group position={[0.18, 0.02, 0.001]}>
+        {[-3.3, -1.9, -0.2, 1.5, 3.1].map((x) => (
           <mesh key={`v-${x}`} position={[x, 0, 0]}>
-            <planeGeometry args={[0.006, 1.8]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.04} />
+            <planeGeometry args={[0.006, 2.5]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.03} />
           </mesh>
         ))}
-        {[-0.62, -0.08, 0.46].map((y) => (
+        {[-0.82, -0.18, 0.34, 0.92].map((y) => (
           <mesh key={`h-${y}`} position={[0, y, 0]}>
-            <planeGeometry args={[6.4, 0.006]} />
-            <meshBasicMaterial color="#25415f" transparent opacity={0.04} />
+            <planeGeometry args={[8.8, 0.006]} />
+            <meshBasicMaterial color="#25415f" transparent opacity={0.03} />
           </mesh>
         ))}
       </group>
-      <mesh position={[-1.2, 0.82, -0.01]}>
-        <boxGeometry args={[0.88, 0.018, 0.004]} />
-        <meshBasicMaterial color="#2a5f8d" transparent opacity={0.16} />
+      <mesh position={[-2.12, 0.98, -0.01]}>
+        <boxGeometry args={[1.02, 0.018, 0.004]} />
+        <meshBasicMaterial color="#2a5f8d" transparent opacity={0.12} />
       </mesh>
-      <mesh position={[-0.84, 0.82, 0]}>
-        <boxGeometry args={[0.26, 0.018, 0.004]} />
-        <meshBasicMaterial color="#7fe6ff" transparent opacity={0.42} />
+      <mesh position={[-1.58, 0.98, 0]}>
+        <boxGeometry args={[0.34, 0.018, 0.004]} />
+        <meshBasicMaterial color="#7fe6ff" transparent opacity={0.34} />
       </mesh>
-      <mesh position={[2.3, -0.54, -0.01]}>
-        <boxGeometry args={[1.12, 0.014, 0.004]} />
-        <meshBasicMaterial color="#214666" transparent opacity={0.12} />
+      <mesh position={[2.8, -0.68, -0.01]}>
+        <boxGeometry args={[1.42, 0.014, 0.004]} />
+        <meshBasicMaterial color="#214666" transparent opacity={0.1} />
       </mesh>
     </group>
   )
@@ -280,7 +284,7 @@ function AutomationDiagram() {
   const lineProgress = useMemo(() => intro.lines, [intro.lines])
 
   return (
-    <group scale={0.68} rotation={[-0.07, 0, -0.008]} position={[0.42, -0.02, 0]}>
+    <group scale={0.96} rotation={[-0.06, 0, -0.006]} position={[0.12, 0.02, 0]}>
       <BackgroundField />
       <group position={[0, 0, 0.02]}>
         {heroConnections.map((connection, index) => (

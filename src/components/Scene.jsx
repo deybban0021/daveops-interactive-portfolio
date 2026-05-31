@@ -19,13 +19,13 @@ function Scene() {
     <div className="scene-shell" aria-hidden="true">
       <Canvas dpr={[1, 1.5]} shadows>
         <color attach="background" args={['#07111d']} />
-        <fog attach="fog" args={['#07111d', 15, 23]} />
-        <PerspectiveCamera makeDefault position={[0.02, 0.02, 9.8]} fov={23.1} />
-        <ambientLight intensity={1.08} />
-        <directionalLight position={[2.4, 3.2, 6.4]} intensity={0.52} color="#8fdcff" castShadow />
-        <pointLight position={[-3.2, 1.6, 4]} intensity={0.05} color="#d8f6ff" />
-        <pointLight position={[2.8, -0.6, 3.4]} intensity={0.09} color="#2ea6ff" />
-        <pointLight position={[0.2, 1.2, 6.2]} intensity={0.07} color="#bcecff" />
+        <fog attach="fog" args={['#07111d', 15.5, 24]} />
+        <PerspectiveCamera makeDefault position={[0.02, 0.04, 10.6]} fov={24.6} />
+        <ambientLight intensity={1.02} />
+        <directionalLight position={[1.8, 2.8, 6.4]} intensity={0.42} color="#8fdcff" castShadow />
+        <pointLight position={[-3.2, 1.6, 4]} intensity={0.04} color="#d8f6ff" />
+        <pointLight position={[2.8, -0.6, 3.4]} intensity={0.08} color="#2ea6ff" />
+        <pointLight position={[0.2, 1.2, 6.2]} intensity={0.05} color="#bcecff" />
         <CameraParallax />
         <AutomationDiagram />
       </Canvas>
