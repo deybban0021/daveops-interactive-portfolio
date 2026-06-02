@@ -1,7 +1,9 @@
+import { cn } from '@/lib/utils'
+
 function App() {
   return (
-    <main className="app-shell">
-      <section className="hero-card" aria-labelledby="restart-title">
+    <main className={cn('app-shell', 'w-full')}>
+      <section className={cn('hero-card')} aria-labelledby="restart-title">
         <p className="eyebrow">Foundation Reset</p>
         <h1 id="restart-title">DaveOps Portfolio Restart</h1>
         <p className="supporting-copy">
