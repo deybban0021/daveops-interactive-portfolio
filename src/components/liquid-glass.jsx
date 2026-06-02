@@ -47,24 +47,34 @@ export function LiquidGlassButton({
       <a
         href={href}
         className={cn(
-          'liquid-glass group relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-3.5 text-sm font-semibold tracking-[0.02em] text-slate-50 transition duration-500 ease-out',
+          'liquid-glass group relative inline-flex items-center justify-center overflow-hidden rounded-full border px-6 py-3.5 text-sm font-semibold tracking-[0.02em] text-slate-50 transition duration-500 ease-out',
           isPrimary
-            ? 'border-cyan-300/40 bg-cyan-400/16 shadow-[0_0_40px_rgba(34,211,238,0.18)]'
-            : 'border-white/16 bg-white/8 shadow-[0_0_28px_rgba(14,165,233,0.12)]',
+            ? 'border-cyan-300/22 bg-[#08111c]/74 shadow-[0_0_24px_rgba(34,211,238,0.08)]'
+            : 'border-slate-400/14 bg-[#04070d]/82 shadow-[0_0_18px_rgba(15,23,42,0.34)]',
           className,
         )}
       >
-        <span className="absolute inset-0 rounded-full border border-white/12" />
+        <span className="absolute inset-0 rounded-full border border-white/8" />
         <span
           className={cn(
             'absolute inset-0 rounded-full',
             isPrimary
-              ? 'bg-[linear-gradient(135deg,rgba(255,255,255,0.26),rgba(34,211,238,0.14)_45%,rgba(14,165,233,0.2))]'
-              : 'bg-[linear-gradient(135deg,rgba(255,255,255,0.18),rgba(148,163,184,0.08)_45%,rgba(34,211,238,0.12))]',
+              ? 'bg-[linear-gradient(135deg,rgba(255,255,255,0.12),rgba(34,211,238,0.06)_45%,rgba(2,6,23,0.14))]'
+              : 'bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(148,163,184,0.05)_45%,rgba(2,6,23,0.16))]',
           )}
         />
-        <span className="absolute inset-[1px] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.05)_18%,rgba(2,6,23,0.28)_68%,rgba(2,6,23,0.42))] backdrop-blur-md [filter:url(#liquid-glass-distortion)]" />
-        <span className="absolute inset-x-[16%] top-[1px] h-1/2 rounded-full bg-white/18 blur-md transition duration-500 group-hover:translate-y-1" />
+        <span
+          className={cn(
+            'absolute inset-[1px] rounded-full backdrop-blur-md [filter:url(#liquid-glass-distortion)]',
+            isPrimary
+              ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04)_16%,rgba(2,6,23,0.54)_62%,rgba(0,0,0,0.82))]'
+              : 'bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_16%,rgba(2,6,23,0.62)_62%,rgba(0,0,0,0.88))]',
+          )}
+        />
+        <span className="absolute inset-x-[16%] top-[1px] h-1/2 rounded-full bg-white/10 blur-md transition duration-500 group-hover:translate-y-1" />
+        {isPrimary ? (
+          <span className="absolute inset-[1px] rounded-full shadow-[inset_0_0_0_1px_rgba(34,211,238,0.12),0_0_18px_rgba(34,211,238,0.08)]" />
+        ) : null}
         <span className="relative z-10 inline-flex items-center gap-2">
           {children}
           <ArrowRight className="h-4 w-4 transition duration-500 group-hover:translate-x-1" />
